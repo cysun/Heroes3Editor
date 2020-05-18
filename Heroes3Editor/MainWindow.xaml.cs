@@ -24,5 +24,10 @@ namespace Heroes3Editor
         {
             InitializeComponent();
         }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
