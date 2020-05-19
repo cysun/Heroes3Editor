@@ -13,9 +13,6 @@
         <CommandBinding Command="ApplicationCommands.Save"
                         Executed="SaveCmdExecuted"
                         CanExecute="SaveCmdCanExecute"/>
-        <CommandBinding Command="ApplicationCommands.SaveAs"
-                        Executed="SaveAsCmdExecuted"
-                        CanExecute="SaveCmdCanExecute"/>
     </Window.CommandBindings>
     <DockPanel LastChildFill="False">
         <Menu x:Name="menu" DockPanel.Dock="Top">
@@ -28,11 +25,6 @@
                 <MenuItem Command="ApplicationCommands.Save">
                     <MenuItem.Icon>
                         <Image Source="/Heroes3Editor;component/Resources/VS2019/Save_16x.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Command="ApplicationCommands.SaveAs">
-                    <MenuItem.Icon>
-                        <Image Source="/Heroes3Editor;component/Resources/VS2019/SaveAs_16x.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
@@ -50,9 +42,6 @@
             <Button HorizontalAlignment="Left" Command="ApplicationCommands.Save">
                 <Image Source="/Heroes3Editor;component/Resources/VS2019/Save_16x.png" Width="16" Height="16"></Image>
             </Button>
-            <Button HorizontalAlignment="Left" Command="ApplicationCommands.SaveAs">
-                <Image Source="/Heroes3Editor;component/Resources/VS2019/SaveAs_16x.png" Width="16" Height="16"></Image>
-            </Button>
         </ToolBar>
         <DockPanel DockPanel.Dock="Top">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
@@ -60,32 +49,7 @@
                 <TextBox Width="200"></TextBox>
                 <Button>Search</Button>
             </StackPanel>
-            <TabControl Margin="5,5,5,5">
-                <StackPanel>
-                    <GroupBox Header="Skills">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*" />
-                                <RowDefinition Height="1*" />
-                            </Grid.RowDefinitions>
-                            <ComboBox Grid.Row="0" Grid.Column="0" />
-                            <ComboBox Grid.Row="0" Grid.Column="1" />
-                            <ComboBox Grid.Row="0" Grid.Column="2" />
-                            <ComboBox Grid.Row="0" Grid.Column="3" />
-                            <ComboBox Grid.Row="1" Grid.Column="0" />
-                            <ComboBox Grid.Row="1" Grid.Column="1" />
-                            <ComboBox Grid.Row="1" Grid.Column="2" />
-                            <ComboBox Grid.Row="1" Grid.Column="3" />
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Spells" />
-                </StackPanel>
+            <TabControl Name="heroTabs" Margin="5,5,5,5">
             </TabControl>
         </DockPanel>
         <StatusBar DockPanel.Dock="Bottom">

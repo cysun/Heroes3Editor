@@ -22,11 +22,12 @@ namespace Heroes3Editor
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindowViewModel ViewModel { get; set; } = new MainWindowViewModel();
+        public Game Game { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            heroTabs.Visibility = Visibility.Hidden;
         }
 
         private void OpenCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -39,28 +40,42 @@ namespace Heroes3Editor
             var openDlg = new OpenFileDialog { Filter = "HoMM3 Savegames |*.CGM" };
             if (openDlg.ShowDialog() == true)
             {
-                ViewModel.Game = new Game(openDlg.FileName);
+                Game = new Game(openDlg.FileName);
+
+                if (Game.Heroes.Count > 0)
+                {
+                    heroTabs.Items.Clear();
+                    foreach (Hero hero in Game.Heroes)
+                    {
+                        var heroTab = new TabItem()
+                        {
+                            Header = hero.Name
+                        };
+                        heroTab.Content = new HeroPanel()
+                        {
+                            Hero = hero
+                        };
+                        heroTabs.Items.Add(heroTab);
+                    }
+                    heroTabs.Visibility = Visibility.Visible;
+                }
+
                 status.Text = openDlg.FileName;
             }
         }
 
         private void SaveCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ViewModel.Game != null;
+            e.CanExecute = Game != null;
         }
 
         private void SaveCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            ViewModel.Game.Save();
-        }
-
-        private void SaveAsCmdExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
             var saveDlg = new SaveFileDialog { Filter = "HoMM3 Savegames |*.CGM" };
             if (saveDlg.ShowDialog() == true)
             {
-                ViewModel.Game.SaveAs(saveDlg.FileName);
-                status.Text = saveDlg.FileName + " saved";
+                Game.Save(saveDlg.FileName);
+                status.Text = saveDlg.FileName;
             }
         }
 

@@ -7,6 +7,11 @@ namespace Heroes3Editor.Models
     {
         public static Skills Skills { get; } = new Skills();
         public static Spells Spells { get; } = new Spells();
+
+        public static string[] CampaignHeroes { get; } =
+        {
+            "Gem", "Gelu", "Crag Hack", "Yog", "Sandro"
+        };
     }
 
     public class Skills
@@ -44,6 +49,8 @@ namespace Heroes3Editor.Models
         };
 
         private static readonly Dictionary<string, int> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
+
+        public string[] Names { get; } = _namesByCode.Values.ToArray();
 
         public string this[int key] => _namesByCode[key];
 
