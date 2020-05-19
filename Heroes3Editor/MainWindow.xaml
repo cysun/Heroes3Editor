@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Heroes3Editor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="HoMM3 Savegame Editor" Height="800" Width="800">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open"
                         Executed="OpenCmdExecuted"
@@ -44,11 +44,6 @@
             </Button>
         </ToolBar>
         <DockPanel DockPanel.Dock="Top">
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <Label>Heroe</Label>
-                <TextBox Width="200"></TextBox>
-                <Button>Search</Button>
-            </StackPanel>
             <TabControl Name="heroTabs" Margin="5,5,5,5">
             </TabControl>
         </DockPanel>

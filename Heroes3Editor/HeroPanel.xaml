@@ -19,8 +19,8 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" />
                 <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" />
@@ -30,6 +30,255 @@
                 <ComboBox Grid.Row="1" Grid.Column="1" />
                 <ComboBox Grid.Row="1" Grid.Column="2" />
                 <ComboBox Grid.Row="1" Grid.Column="3" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Spells">
+            <GroupBox.Resources>
+                <Style TargetType="CheckBox">
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </GroupBox.Resources>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <GroupBox Header="All Schools" Grid.Row="0" Grid.ColumnSpan="4">
+                    <WrapPanel>
+                        <CheckBox>
+                            <Label>Magic Arrow</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Visions</Label>
+                        </CheckBox>
+                    </WrapPanel>
+                </GroupBox>
+                <GroupBox Header="Air Magic" Grid.Row="1" Grid.Column="0">
+                    <StackPanel>
+                        <CheckBox>
+                            <Label>Haste</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>View Air</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Disguise</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Disrupting Ray</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Fortune</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Lightning Bolt</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Precision</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Protection from Air</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Air Shield</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Destroy Undead</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Hypnotize</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Chain Lightning</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Counterstrike</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Dimension Door</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Fly</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Magic Mirror</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Summon Air Elemental</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Titan's Lightning Bolt</Label>
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Earth Magic" Grid.Row="1" Grid.Column="1">
+                    <StackPanel>
+                        <CheckBox>
+                            <Label>Shield</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Slow</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Stone Skin</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>View Earth</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Death Ripple</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Quicksand</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Animate Dead</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Anti-Magic</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Earthquake</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Force Field</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Protection from Earth</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Meteor Shower</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Resurrection</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Town Portal</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Fly</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Implosion</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Summon Earth Elemental</Label>
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Fir Magic" Grid.Row="1" Grid.Column="2">
+                    <StackPanel>
+                        <CheckBox>
+                            <Label>Bloodlust</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Curse</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Protection from Fire</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Blind</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Fire Wall</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Fireball</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Land Mine</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Misfortune</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Armageddon</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Berserk</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Fire Shield</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Frenzy</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Inferno</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Slayer</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Sacrifice</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Summon Fire Elemental</Label>
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Water Magic" Grid.Row="1" Grid.Column="3">
+                    <StackPanel>
+                        <CheckBox>
+                            <Label>Cure</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Dispel</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Bless</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Protection from Water</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Summon Boat</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Ice Bolt</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Remove Obstacle</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Scuttle Boat</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Weakness</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Forgetfulness</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Frost Ring</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Mirth</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Teleport</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Clone</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Prayer</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Water Walk</Label>
+                        </CheckBox>
+                        <CheckBox>
+                            <Label>Summon Water Elemental</Label>
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
         </GroupBox>
     </StackPanel>
