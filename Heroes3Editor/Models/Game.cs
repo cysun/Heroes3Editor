@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Security.Cryptography;
 using System.Text;
 using ICSharpCode.SharpZipLib.GZip;
 
@@ -96,7 +97,7 @@ namespace Heroes3Editor.Models
             {
                 var skillSlotIndex = _game.Bytes[BytePosition + Constants.Offsets["SkillSlots"] + i];
                 if (skillSlotIndex != 0)
-                    Skills[skillSlotIndex-1] = Constants.Skills[i];
+                    Skills[skillSlotIndex - 1] = Constants.Skills[i];
             }
 
             for (int i = 0; i < 70; ++i)
@@ -104,6 +105,28 @@ namespace Heroes3Editor.Models
                 if (_game.Bytes[BytePosition + Constants.Offsets["Spells"] + i] == 1)
                     Spells.Add(Constants.Spells[i]);
             }
+        }
+
+        public void AddSpell(string spell)
+        {
+            if (!Spells.Add(spell)) return;
+
+            int spellPosition = BytePosition + Constants.Offsets["Spells"] + Constants.Spells[spell];
+            _game.Bytes[spellPosition] = 1;
+
+            int spellBookPosition = BytePosition + Constants.Offsets["SpellBook"] + Constants.Spells[spell];
+            _game.Bytes[spellBookPosition] = 1;
+        }
+
+        public void RemoveSpell(string spell)
+        {
+            if (!Spells.Remove(spell)) return;
+
+            int spellPosition = BytePosition + Constants.Offsets["Spells"] + Constants.Spells[spell];
+            _game.Bytes[spellPosition] = 0;
+
+            int spellBookPosition = BytePosition + Constants.Offsets["SpellBook"] + Constants.Spells[spell];
+            _game.Bytes[spellBookPosition] = 0;
         }
     }
 }

@@ -47,5 +47,17 @@ namespace Heroes3Editor
         {
             InitializeComponent();
         }
+
+        private void AddSpell(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.AddSpell(chkBox.Name);
+        }
+
+        private void RemoveSpell(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.RemoveSpell(chkBox.Name);
+        }
     }
 }
