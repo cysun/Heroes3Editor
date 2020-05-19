@@ -19,7 +19,29 @@ namespace Heroes3Editor
     /// </summary>
     public partial class HeroPanel : UserControl
     {
-        public Hero Hero { get; set; }
+        private Hero _hero;
+
+        public Hero Hero
+        {
+            set
+            {
+                _hero = value;
+                for (int i = 0; i < 8; ++i)
+                {
+                    var cboBox = FindName("SkillSlot" + i) as ComboBox;
+                    if (i < _hero.NumOfSkills)
+                        cboBox.SelectedItem = _hero.Skills[i];
+                    else if (i > _hero.NumOfSkills)
+                        cboBox.IsEnabled = false;
+                }
+
+                foreach (var spell in _hero.Spells)
+                {
+                    var chkBox = FindName(spell) as CheckBox;
+                    chkBox.IsChecked = true;
+                }
+            }
+        }
 
         public HeroPanel()
         {

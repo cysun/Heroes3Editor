@@ -22,14 +22,14 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Grid.Row="0" Grid.Column="2" />
-                <ComboBox Grid.Row="0" Grid.Column="3" />
-                <ComboBox Grid.Row="1" Grid.Column="0" />
-                <ComboBox Grid.Row="1" Grid.Column="1" />
-                <ComboBox Grid.Row="1" Grid.Column="2" />
-                <ComboBox Grid.Row="1" Grid.Column="3" />
+                <ComboBox Name="SkillSlot0" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot2" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot3" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot4" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot5" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot6" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot7" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Spells">
@@ -51,230 +51,227 @@
                 </Grid.RowDefinitions>
                 <GroupBox Header="All Schools" Grid.Row="0" Grid.ColumnSpan="4">
                     <WrapPanel>
-                        <CheckBox>
+                        <CheckBox Name="Magic_Arrow">
                             <Label>Magic Arrow</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Visions">
                             <Label>Visions</Label>
                         </CheckBox>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="Air Magic" Grid.Row="1" Grid.Column="0">
                     <StackPanel>
-                        <CheckBox>
+                        <CheckBox Name="Haste">
                             <Label>Haste</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="View_Air">
                             <Label>View Air</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Disguise">
                             <Label>Disguise</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Disrupting_Ray">
                             <Label>Disrupting Ray</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Fortune">
                             <Label>Fortune</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Lightning_Bolt">
                             <Label>Lightning Bolt</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Precision">
                             <Label>Precision</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Protection_from_Air">
                             <Label>Protection from Air</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Air_Shield">
                             <Label>Air Shield</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Destroy_Undead">
                             <Label>Destroy Undead</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Hypnotize">
                             <Label>Hypnotize</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Chain_Lightning">
                             <Label>Chain Lightning</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Counterstrike">
                             <Label>Counterstrike</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Dimension_Door">
                             <Label>Dimension Door</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Fly">
                             <Label>Fly</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Magic_Mirror">
                             <Label>Magic Mirror</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Summon_Air_Elemental">
                             <Label>Summon Air Elemental</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Titans_Lightning_Bolt">
                             <Label>Titan's Lightning Bolt</Label>
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Earth Magic" Grid.Row="1" Grid.Column="1">
                     <StackPanel>
-                        <CheckBox>
+                        <CheckBox Name="Shield">
                             <Label>Shield</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Slow">
                             <Label>Slow</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Stone_Skin">
                             <Label>Stone Skin</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="View_Earth">
                             <Label>View Earth</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Death_Ripple">
                             <Label>Death Ripple</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Quicksand">
                             <Label>Quicksand</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Animate_Dead">
                             <Label>Animate Dead</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Anti_Magic">
                             <Label>Anti-Magic</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Earthquake">
                             <Label>Earthquake</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Force_Field">
                             <Label>Force Field</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Protection_from_Earth">
                             <Label>Protection from Earth</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Meteor_Shower">
                             <Label>Meteor Shower</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Resurrection">
                             <Label>Resurrection</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Town_Portal">
                             <Label>Town Portal</Label>
                         </CheckBox>
-                        <CheckBox>
-                            <Label>Fly</Label>
-                        </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Implosion">
                             <Label>Implosion</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Summon_Earth_Elemental">
                             <Label>Summon Earth Elemental</Label>
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Fir Magic" Grid.Row="1" Grid.Column="2">
                     <StackPanel>
-                        <CheckBox>
+                        <CheckBox Name="Bloodlust">
                             <Label>Bloodlust</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Curse">
                             <Label>Curse</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Protection_from_Fire">
                             <Label>Protection from Fire</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Blind">
                             <Label>Blind</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Fire_Wall">
                             <Label>Fire Wall</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Fireball">
                             <Label>Fireball</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Land_Mine">
                             <Label>Land Mine</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Misfortune">
                             <Label>Misfortune</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Armageddon">
                             <Label>Armageddon</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Berserk">
                             <Label>Berserk</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Fire_Shield">
                             <Label>Fire Shield</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Frenzy">
                             <Label>Frenzy</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Inferno">
                             <Label>Inferno</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Slayer">
                             <Label>Slayer</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Sacrifice">
                             <Label>Sacrifice</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Summon_Fire_Elemental">
                             <Label>Summon Fire Elemental</Label>
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Water Magic" Grid.Row="1" Grid.Column="3">
                     <StackPanel>
-                        <CheckBox>
+                        <CheckBox Name="Cure">
                             <Label>Cure</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Dispel">
                             <Label>Dispel</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Bless">
                             <Label>Bless</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Protection_from_Water">
                             <Label>Protection from Water</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Summon_Boat">
                             <Label>Summon Boat</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Ice_Bolt">
                             <Label>Ice Bolt</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Remove_Obstacle">
                             <Label>Remove Obstacle</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Scuttle_Boat">
                             <Label>Scuttle Boat</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Weakness">
                             <Label>Weakness</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Forgetfulness">
                             <Label>Forgetfulness</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Frost_Ring">
                             <Label>Frost Ring</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Mirth">
                             <Label>Mirth</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Teleport">
                             <Label>Teleport</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Clone">
                             <Label>Clone</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Prayer">
                             <Label>Prayer</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Water_Walk">
                             <Label>Water Walk</Label>
                         </CheckBox>
-                        <CheckBox>
+                        <CheckBox Name="Summon_Water_Elemental">
                             <Label>Summon Water Elemental</Label>
                         </CheckBox>
                     </StackPanel>

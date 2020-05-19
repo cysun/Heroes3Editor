@@ -64,7 +64,7 @@ namespace Heroes3Editor.Models
                     }
                 if (found)
                 {
-                    Heroes.Add(new Hero(name, i));
+                    Heroes.Add(new Hero(this, name, i));
                     return true;
                 }
             }
@@ -74,14 +74,36 @@ namespace Heroes3Editor.Models
 
     public class Hero
     {
+        private Game _game;
+
         public string Name { get; }
 
         public int BytePosition { get; }
 
-        public Hero(string name, int bytePosition)
+        public int NumOfSkills { get; }
+        public string[] Skills = new string[8];
+
+        public ISet<string> Spells { get; } = new HashSet<string>();
+
+        public Hero(Game game, string name, int bytePosition)
         {
+            _game = game;
             Name = name;
             BytePosition = bytePosition;
+
+            NumOfSkills = _game.Bytes[BytePosition + Constants.Offsets["NumOfSkils"]];
+            for (int i = 0; i < 28; ++i)
+            {
+                var skillSlotIndex = _game.Bytes[BytePosition + Constants.Offsets["SkillSlots"] + i];
+                if (skillSlotIndex != 0)
+                    Skills[skillSlotIndex-1] = Constants.Skills[i];
+            }
+
+            for (int i = 0; i < 70; ++i)
+            {
+                if (_game.Bytes[BytePosition + Constants.Offsets["Spells"] + i] == 1)
+                    Spells.Add(Constants.Spells[i]);
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Heroes3Editor
                 if (Game.Heroes.Count > 0)
                 {
                     heroTabs.Items.Clear();
-                    foreach (Hero hero in Game.Heroes)
+                    foreach (var hero in Game.Heroes)
                     {
                         var heroTab = new TabItem()
                         {
