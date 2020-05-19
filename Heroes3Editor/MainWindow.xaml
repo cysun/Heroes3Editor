@@ -6,20 +6,31 @@
         xmlns:local="clr-namespace:Heroes3Editor"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open"
+                        Executed="OpenCmdExecuted"
+                        CanExecute="OpenCmdCanExecute"/>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        Executed="SaveCmdExecuted"
+                        CanExecute="SaveCmdCanExecute"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs"
+                        Executed="SaveAsCmdExecuted"
+                        CanExecute="SaveCmdCanExecute"/>
+    </Window.CommandBindings>
     <DockPanel LastChildFill="False">
         <Menu x:Name="menu" DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open">
+                <MenuItem Command="ApplicationCommands.Open">
                     <MenuItem.Icon>
                         <Image Source="/Resources/VS2019/OpenFile_16x.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Save">
+                <MenuItem Command="ApplicationCommands.Save">
                     <MenuItem.Icon>
                         <Image Source="/Heroes3Editor;component/Resources/VS2019/Save_16x.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Save _As">
+                <MenuItem Command="ApplicationCommands.SaveAs">
                     <MenuItem.Icon>
                         <Image Source="/Heroes3Editor;component/Resources/VS2019/SaveAs_16x.png"/>
                     </MenuItem.Icon>
@@ -33,17 +44,16 @@
             </MenuItem>
         </Menu>
         <ToolBar x:Name="toolBar" DockPanel.Dock="Top">
-            <Button x:Name="openButton" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button HorizontalAlignment="Left" Command="ApplicationCommands.Open">
                 <Image Source="/Heroes3Editor;component/Resources/VS2019/OpenFile_16x.png" Width="16" Height="16"></Image>
             </Button>
-            <Button x:Name="saveButton" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button HorizontalAlignment="Left" Command="ApplicationCommands.Save">
                 <Image Source="/Heroes3Editor;component/Resources/VS2019/Save_16x.png" Width="16" Height="16"></Image>
             </Button>
-            <Button x:Name="saveAsButton" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button HorizontalAlignment="Left" Command="ApplicationCommands.SaveAs">
                 <Image Source="/Heroes3Editor;component/Resources/VS2019/SaveAs_16x.png" Width="16" Height="16"></Image>
             </Button>
         </ToolBar>
-        <StatusBar DockPanel.Dock="Bottom"/>
         <DockPanel DockPanel.Dock="Top">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Label>Heroe</Label>
@@ -78,5 +88,10 @@
                 </StackPanel>
             </TabControl>
         </DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="status">Ready</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </DockPanel>
 </Window>

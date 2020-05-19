@@ -6,4 +6,11 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Resource Include="Resources\VS2019\Exit_16x.png" />
+    <Resource Include="Resources\VS2019\OpenFile_16x.png" />
+    <Resource Include="Resources\VS2019\SaveAs_16x.png" />
+    <Resource Include="Resources\VS2019\Save_16x.png" />
+  </ItemGroup>
+
 </Project>
