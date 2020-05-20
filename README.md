@@ -14,3 +14,4 @@ a little easier.
   [GOG HoMM Series Forum](https://www.gog.com/forum/heroes_of_might_and_magic_series#1589412409).
 * Various game information on [HoMM3 Wiki](https://heroes.thelazy.net//index.php/Main_Page).
 * [Visual Studio Image Library](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the icons.
+* [Exhumed](http://www.iconarchive.com/artist/3xhumed.html) for the application icon.

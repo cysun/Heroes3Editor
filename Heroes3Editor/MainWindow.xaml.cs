@@ -28,6 +28,7 @@ namespace Heroes3Editor
         {
             InitializeComponent();
             heroTabs.Visibility = Visibility.Hidden;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void OpenCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
