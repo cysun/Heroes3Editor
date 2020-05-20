@@ -9,274 +9,276 @@
     <UserControl.Resources>
         <local:Constants x:Key="constants"/>
     </UserControl.Resources>
-    <StackPanel>
-        <GroupBox Header="Skills">
-            <Grid DataContext="{Binding Source={StaticResource constants}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <ComboBox Name="SkillSlot0" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot2" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot3" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot4" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot5" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot6" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                <ComboBox Name="SkillSlot7" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="Spells">
-            <GroupBox.Resources>
-                <Style TargetType="CheckBox">
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                </Style>
-            </GroupBox.Resources>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <GroupBox Header="All Schools" Grid.Row="0" Grid.ColumnSpan="4">
-                    <WrapPanel>
-                        <CheckBox Name="Magic_Arrow" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Magic Arrow</Label>
-                        </CheckBox>
-                        <CheckBox Name="Visions" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Visions</Label>
-                        </CheckBox>
-                    </WrapPanel>
-                </GroupBox>
-                <GroupBox Header="Air Magic" Grid.Row="1" Grid.Column="0">
-                    <StackPanel>
-                        <CheckBox Name="Haste" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Haste</Label>
-                        </CheckBox>
-                        <CheckBox Name="View_Air" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>View Air</Label>
-                        </CheckBox>
-                        <CheckBox Name="Disguise" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Disguise</Label>
-                        </CheckBox>
-                        <CheckBox Name="Disrupting_Ray" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Disrupting Ray</Label>
-                        </CheckBox>
-                        <CheckBox Name="Fortune" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Fortune</Label>
-                        </CheckBox>
-                        <CheckBox Name="Lightning_Bolt" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Lightning Bolt</Label>
-                        </CheckBox>
-                        <CheckBox Name="Precision" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Precision</Label>
-                        </CheckBox>
-                        <CheckBox Name="Protection_from_Air" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Protection from Air</Label>
-                        </CheckBox>
-                        <CheckBox Name="Air_Shield" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Air Shield</Label>
-                        </CheckBox>
-                        <CheckBox Name="Destroy_Undead" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Destroy Undead</Label>
-                        </CheckBox>
-                        <CheckBox Name="Hypnotize" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Hypnotize</Label>
-                        </CheckBox>
-                        <CheckBox Name="Chain_Lightning" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Chain Lightning</Label>
-                        </CheckBox>
-                        <CheckBox Name="Counterstrike" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Counterstrike</Label>
-                        </CheckBox>
-                        <CheckBox Name="Dimension_Door" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Dimension Door</Label>
-                        </CheckBox>
-                        <CheckBox Name="Fly" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Fly</Label>
-                        </CheckBox>
-                        <CheckBox Name="Magic_Mirror" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Magic Mirror</Label>
-                        </CheckBox>
-                        <CheckBox Name="Summon_Air_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Summon Air Elemental</Label>
-                        </CheckBox>
-                        <CheckBox Name="Titans_Lightning_Bolt" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Titan's Lightning Bolt</Label>
-                        </CheckBox>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="Earth Magic" Grid.Row="1" Grid.Column="1">
-                    <StackPanel>
-                        <CheckBox Name="Shield" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Shield</Label>
-                        </CheckBox>
-                        <CheckBox Name="Slow" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Slow</Label>
-                        </CheckBox>
-                        <CheckBox Name="Stone_Skin" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Stone Skin</Label>
-                        </CheckBox>
-                        <CheckBox Name="View_Earth" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>View Earth</Label>
-                        </CheckBox>
-                        <CheckBox Name="Death_Ripple" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Death Ripple</Label>
-                        </CheckBox>
-                        <CheckBox Name="Quicksand" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Quicksand</Label>
-                        </CheckBox>
-                        <CheckBox Name="Animate_Dead" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Animate Dead</Label>
-                        </CheckBox>
-                        <CheckBox Name="Anti_Magic" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Anti-Magic</Label>
-                        </CheckBox>
-                        <CheckBox Name="Earthquake" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Earthquake</Label>
-                        </CheckBox>
-                        <CheckBox Name="Force_Field" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Force Field</Label>
-                        </CheckBox>
-                        <CheckBox Name="Protection_from_Earth" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Protection from Earth</Label>
-                        </CheckBox>
-                        <CheckBox Name="Meteor_Shower" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Meteor Shower</Label>
-                        </CheckBox>
-                        <CheckBox Name="Resurrection" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Resurrection</Label>
-                        </CheckBox>
-                        <CheckBox Name="Town_Portal" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Town Portal</Label>
-                        </CheckBox>
-                        <CheckBox Name="Implosion" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Implosion</Label>
-                        </CheckBox>
-                        <CheckBox Name="Summon_Earth_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Summon Earth Elemental</Label>
-                        </CheckBox>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="Fir Magic" Grid.Row="1" Grid.Column="2">
-                    <StackPanel>
-                        <CheckBox Name="Bloodlust" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Bloodlust</Label>
-                        </CheckBox>
-                        <CheckBox Name="Curse" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Curse</Label>
-                        </CheckBox>
-                        <CheckBox Name="Protection_from_Fire" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Protection from Fire</Label>
-                        </CheckBox>
-                        <CheckBox Name="Blind" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Blind</Label>
-                        </CheckBox>
-                        <CheckBox Name="Fire_Wall" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Fire Wall</Label>
-                        </CheckBox>
-                        <CheckBox Name="Fireball" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Fireball</Label>
-                        </CheckBox>
-                        <CheckBox Name="Land_Mine" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Land Mine</Label>
-                        </CheckBox>
-                        <CheckBox Name="Misfortune" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Misfortune</Label>
-                        </CheckBox>
-                        <CheckBox Name="Armageddon" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Armageddon</Label>
-                        </CheckBox>
-                        <CheckBox Name="Berserk" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Berserk</Label>
-                        </CheckBox>
-                        <CheckBox Name="Fire_Shield" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Fire Shield</Label>
-                        </CheckBox>
-                        <CheckBox Name="Frenzy" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Frenzy</Label>
-                        </CheckBox>
-                        <CheckBox Name="Inferno" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Inferno</Label>
-                        </CheckBox>
-                        <CheckBox Name="Slayer" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Slayer</Label>
-                        </CheckBox>
-                        <CheckBox Name="Sacrifice" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Sacrifice</Label>
-                        </CheckBox>
-                        <CheckBox Name="Summon_Fire_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Summon Fire Elemental</Label>
-                        </CheckBox>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="Water Magic" Grid.Row="1" Grid.Column="3">
-                    <StackPanel>
-                        <CheckBox Name="Cure" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Cure</Label>
-                        </CheckBox>
-                        <CheckBox Name="Dispel" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Dispel</Label>
-                        </CheckBox>
-                        <CheckBox Name="Bless" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Bless</Label>
-                        </CheckBox>
-                        <CheckBox Name="Protection_from_Water" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Protection from Water</Label>
-                        </CheckBox>
-                        <CheckBox Name="Summon_Boat" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Summon Boat</Label>
-                        </CheckBox>
-                        <CheckBox Name="Ice_Bolt" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Ice Bolt</Label>
-                        </CheckBox>
-                        <CheckBox Name="Remove_Obstacle" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Remove Obstacle</Label>
-                        </CheckBox>
-                        <CheckBox Name="Scuttle_Boat" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Scuttle Boat</Label>
-                        </CheckBox>
-                        <CheckBox Name="Weakness" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Weakness</Label>
-                        </CheckBox>
-                        <CheckBox Name="Forgetfulness" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Forgetfulness</Label>
-                        </CheckBox>
-                        <CheckBox Name="Frost_Ring" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Frost Ring</Label>
-                        </CheckBox>
-                        <CheckBox Name="Mirth" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Mirth</Label>
-                        </CheckBox>
-                        <CheckBox Name="Teleport" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Teleport</Label>
-                        </CheckBox>
-                        <CheckBox Name="Clone" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Clone</Label>
-                        </CheckBox>
-                        <CheckBox Name="Prayer" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Prayer</Label>
-                        </CheckBox>
-                        <CheckBox Name="Water_Walk" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Water Walk</Label>
-                        </CheckBox>
-                        <CheckBox Name="Summon_Water_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
-                            <Label>Summon Water Elemental</Label>
-                        </CheckBox>
-                    </StackPanel>
-                </GroupBox>
-            </Grid>
-        </GroupBox>
-    </StackPanel>
+    <ScrollViewer>
+        <StackPanel>
+            <GroupBox Header="Skills">
+                <Grid DataContext="{Binding Source={StaticResource constants}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ComboBox Name="SkillSlot0" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot2" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot3" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot4" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot5" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot6" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <ComboBox Name="SkillSlot7" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Spells">
+                <GroupBox.Resources>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </GroupBox.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="All Schools" Grid.Row="0" Grid.ColumnSpan="4">
+                        <WrapPanel>
+                            <CheckBox Name="Magic_Arrow" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Magic Arrow</Label>
+                            </CheckBox>
+                            <CheckBox Name="Visions" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Visions</Label>
+                            </CheckBox>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Air Magic" Grid.Row="1" Grid.Column="0">
+                        <StackPanel>
+                            <CheckBox Name="Haste" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Haste</Label>
+                            </CheckBox>
+                            <CheckBox Name="View_Air" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>View Air</Label>
+                            </CheckBox>
+                            <CheckBox Name="Disguise" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Disguise</Label>
+                            </CheckBox>
+                            <CheckBox Name="Disrupting_Ray" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Disrupting Ray</Label>
+                            </CheckBox>
+                            <CheckBox Name="Fortune" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Fortune</Label>
+                            </CheckBox>
+                            <CheckBox Name="Lightning_Bolt" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Lightning Bolt</Label>
+                            </CheckBox>
+                            <CheckBox Name="Precision" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Precision</Label>
+                            </CheckBox>
+                            <CheckBox Name="Protection_from_Air" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Protection from Air</Label>
+                            </CheckBox>
+                            <CheckBox Name="Air_Shield" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Air Shield</Label>
+                            </CheckBox>
+                            <CheckBox Name="Destroy_Undead" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Destroy Undead</Label>
+                            </CheckBox>
+                            <CheckBox Name="Hypnotize" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Hypnotize</Label>
+                            </CheckBox>
+                            <CheckBox Name="Chain_Lightning" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Chain Lightning</Label>
+                            </CheckBox>
+                            <CheckBox Name="Counterstrike" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Counterstrike</Label>
+                            </CheckBox>
+                            <CheckBox Name="Dimension_Door" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Dimension Door</Label>
+                            </CheckBox>
+                            <CheckBox Name="Fly" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Fly</Label>
+                            </CheckBox>
+                            <CheckBox Name="Magic_Mirror" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Magic Mirror</Label>
+                            </CheckBox>
+                            <CheckBox Name="Summon_Air_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Summon Air Elemental</Label>
+                            </CheckBox>
+                            <CheckBox Name="Titans_Lightning_Bolt" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Titan's Lightning Bolt</Label>
+                            </CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Earth Magic" Grid.Row="1" Grid.Column="1">
+                        <StackPanel>
+                            <CheckBox Name="Shield" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Shield</Label>
+                            </CheckBox>
+                            <CheckBox Name="Slow" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Slow</Label>
+                            </CheckBox>
+                            <CheckBox Name="Stone_Skin" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Stone Skin</Label>
+                            </CheckBox>
+                            <CheckBox Name="View_Earth" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>View Earth</Label>
+                            </CheckBox>
+                            <CheckBox Name="Death_Ripple" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Death Ripple</Label>
+                            </CheckBox>
+                            <CheckBox Name="Quicksand" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Quicksand</Label>
+                            </CheckBox>
+                            <CheckBox Name="Animate_Dead" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Animate Dead</Label>
+                            </CheckBox>
+                            <CheckBox Name="Anti_Magic" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Anti-Magic</Label>
+                            </CheckBox>
+                            <CheckBox Name="Earthquake" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Earthquake</Label>
+                            </CheckBox>
+                            <CheckBox Name="Force_Field" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Force Field</Label>
+                            </CheckBox>
+                            <CheckBox Name="Protection_from_Earth" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Protection from Earth</Label>
+                            </CheckBox>
+                            <CheckBox Name="Meteor_Shower" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Meteor Shower</Label>
+                            </CheckBox>
+                            <CheckBox Name="Resurrection" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Resurrection</Label>
+                            </CheckBox>
+                            <CheckBox Name="Town_Portal" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Town Portal</Label>
+                            </CheckBox>
+                            <CheckBox Name="Implosion" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Implosion</Label>
+                            </CheckBox>
+                            <CheckBox Name="Summon_Earth_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Summon Earth Elemental</Label>
+                            </CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Fir Magic" Grid.Row="1" Grid.Column="2">
+                        <StackPanel>
+                            <CheckBox Name="Bloodlust" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Bloodlust</Label>
+                            </CheckBox>
+                            <CheckBox Name="Curse" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Curse</Label>
+                            </CheckBox>
+                            <CheckBox Name="Protection_from_Fire" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Protection from Fire</Label>
+                            </CheckBox>
+                            <CheckBox Name="Blind" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Blind</Label>
+                            </CheckBox>
+                            <CheckBox Name="Fire_Wall" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Fire Wall</Label>
+                            </CheckBox>
+                            <CheckBox Name="Fireball" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Fireball</Label>
+                            </CheckBox>
+                            <CheckBox Name="Land_Mine" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Land Mine</Label>
+                            </CheckBox>
+                            <CheckBox Name="Misfortune" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Misfortune</Label>
+                            </CheckBox>
+                            <CheckBox Name="Armageddon" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Armageddon</Label>
+                            </CheckBox>
+                            <CheckBox Name="Berserk" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Berserk</Label>
+                            </CheckBox>
+                            <CheckBox Name="Fire_Shield" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Fire Shield</Label>
+                            </CheckBox>
+                            <CheckBox Name="Frenzy" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Frenzy</Label>
+                            </CheckBox>
+                            <CheckBox Name="Inferno" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Inferno</Label>
+                            </CheckBox>
+                            <CheckBox Name="Slayer" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Slayer</Label>
+                            </CheckBox>
+                            <CheckBox Name="Sacrifice" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Sacrifice</Label>
+                            </CheckBox>
+                            <CheckBox Name="Summon_Fire_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Summon Fire Elemental</Label>
+                            </CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Water Magic" Grid.Row="1" Grid.Column="3">
+                        <StackPanel>
+                            <CheckBox Name="Cure" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Cure</Label>
+                            </CheckBox>
+                            <CheckBox Name="Dispel" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Dispel</Label>
+                            </CheckBox>
+                            <CheckBox Name="Bless" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Bless</Label>
+                            </CheckBox>
+                            <CheckBox Name="Protection_from_Water" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Protection from Water</Label>
+                            </CheckBox>
+                            <CheckBox Name="Summon_Boat" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Summon Boat</Label>
+                            </CheckBox>
+                            <CheckBox Name="Ice_Bolt" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Ice Bolt</Label>
+                            </CheckBox>
+                            <CheckBox Name="Remove_Obstacle" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Remove Obstacle</Label>
+                            </CheckBox>
+                            <CheckBox Name="Scuttle_Boat" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Scuttle Boat</Label>
+                            </CheckBox>
+                            <CheckBox Name="Weakness" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Weakness</Label>
+                            </CheckBox>
+                            <CheckBox Name="Forgetfulness" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Forgetfulness</Label>
+                            </CheckBox>
+                            <CheckBox Name="Frost_Ring" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Frost Ring</Label>
+                            </CheckBox>
+                            <CheckBox Name="Mirth" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Mirth</Label>
+                            </CheckBox>
+                            <CheckBox Name="Teleport" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Teleport</Label>
+                            </CheckBox>
+                            <CheckBox Name="Clone" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Clone</Label>
+                            </CheckBox>
+                            <CheckBox Name="Prayer" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Prayer</Label>
+                            </CheckBox>
+                            <CheckBox Name="Water_Walk" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Water Walk</Label>
+                            </CheckBox>
+                            <CheckBox Name="Summon_Water_Elemental" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Summon Water Elemental</Label>
+                            </CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

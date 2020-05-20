@@ -43,7 +43,7 @@ namespace Heroes3Editor.Models
 
         public void AddCampaignHeroes()
         {
-            foreach (var hero in Constants.CampaignHeroes)
+            foreach (var hero in Constants.Heroes)
                 AddHero(hero);
         }
 
