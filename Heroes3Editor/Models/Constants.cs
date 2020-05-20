@@ -15,7 +15,7 @@ namespace Heroes3Editor.Models
 
         public static Dictionary<string, int> Offsets = new Dictionary<string, int>()
         {
-            {"NumOfSkils", -126},
+            {"NumOfSkills", -126},
             {"Skills", 13},
             {"SkillSlots", 41},
             {"Spells", 73},

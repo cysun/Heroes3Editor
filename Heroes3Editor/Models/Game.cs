@@ -65,7 +65,7 @@ namespace Heroes3Editor.Models
                     }
                 if (found)
                 {
-                    Heroes.Add(new Hero(this, name, i));
+                    Heroes.Add(new Hero(name, this, i));
                     return true;
                 }
             }
@@ -75,35 +75,63 @@ namespace Heroes3Editor.Models
 
     public class Hero
     {
-        private Game _game;
-
         public string Name { get; }
 
-        public int BytePosition { get; }
+        private Game _game;
+        private int _bytePosition;
 
-        public int NumOfSkills { get; }
+        private int _numOfSkills;
+        public int NumOfSkills { get => _numOfSkills; }
         public string[] Skills = new string[8];
 
         public ISet<string> Spells { get; } = new HashSet<string>();
 
-        public Hero(Game game, string name, int bytePosition)
+        public Hero(string name, Game game, int bytePosition)
         {
-            _game = game;
             Name = name;
-            BytePosition = bytePosition;
+            _game = game;
+            _bytePosition = bytePosition;
 
-            NumOfSkills = _game.Bytes[BytePosition + Constants.Offsets["NumOfSkils"]];
+            _numOfSkills = _game.Bytes[_bytePosition + Constants.Offsets["NumOfSkills"]];
             for (int i = 0; i < 28; ++i)
             {
-                var skillSlotIndex = _game.Bytes[BytePosition + Constants.Offsets["SkillSlots"] + i];
+                var skillSlotIndex = _game.Bytes[_bytePosition + Constants.Offsets["SkillSlots"] + i];
                 if (skillSlotIndex != 0)
                     Skills[skillSlotIndex - 1] = Constants.Skills[i];
             }
 
             for (int i = 0; i < 70; ++i)
             {
-                if (_game.Bytes[BytePosition + Constants.Offsets["Spells"] + i] == 1)
+                if (_game.Bytes[_bytePosition + Constants.Offsets["Spells"] + i] == 1)
                     Spells.Add(Constants.Spells[i]);
+            }
+        }
+
+        public void UpdateSkill(int slot, string skill)
+        {
+            if (slot < 0 || slot > _numOfSkills) return;
+            for (int i = 0; i < _numOfSkills; ++i)
+                if (Skills[i] == skill) return;
+
+            byte skillLevel = 1;
+
+            if (slot < _numOfSkills)
+            {
+                var oldSkill = Skills[slot];
+                var oldSkillLevelPosition = _bytePosition + Constants.Offsets["Skills"] + Constants.Skills[oldSkill];
+                skillLevel = _game.Bytes[oldSkillLevelPosition];
+                _game.Bytes[oldSkillLevelPosition] = 0;
+                _game.Bytes[_bytePosition + Constants.Offsets["SkillSlots"] + Constants.Skills[oldSkill]] = 0;
+            }
+
+            Skills[slot] = skill;
+            _game.Bytes[_bytePosition + Constants.Offsets["Skills"] + Constants.Skills[skill]] = skillLevel;
+            _game.Bytes[_bytePosition + Constants.Offsets["SkillSlots"] + Constants.Skills[skill]] = (byte)(slot + 1);
+
+            if (slot == _numOfSkills)
+            {
+                ++_numOfSkills;
+                _game.Bytes[_bytePosition + Constants.Offsets["NumOfSkills"]] = (byte)_numOfSkills;
             }
         }
 
@@ -111,10 +139,10 @@ namespace Heroes3Editor.Models
         {
             if (!Spells.Add(spell)) return;
 
-            int spellPosition = BytePosition + Constants.Offsets["Spells"] + Constants.Spells[spell];
+            int spellPosition = _bytePosition + Constants.Offsets["Spells"] + Constants.Spells[spell];
             _game.Bytes[spellPosition] = 1;
 
-            int spellBookPosition = BytePosition + Constants.Offsets["SpellBook"] + Constants.Spells[spell];
+            int spellBookPosition = _bytePosition + Constants.Offsets["SpellBook"] + Constants.Spells[spell];
             _game.Bytes[spellBookPosition] = 1;
         }
 
@@ -122,10 +150,10 @@ namespace Heroes3Editor.Models
         {
             if (!Spells.Remove(spell)) return;
 
-            int spellPosition = BytePosition + Constants.Offsets["Spells"] + Constants.Spells[spell];
+            int spellPosition = _bytePosition + Constants.Offsets["Spells"] + Constants.Spells[spell];
             _game.Bytes[spellPosition] = 0;
 
-            int spellBookPosition = BytePosition + Constants.Offsets["SpellBook"] + Constants.Spells[spell];
+            int spellBookPosition = _bytePosition + Constants.Offsets["SpellBook"] + Constants.Spells[spell];
             _game.Bytes[spellBookPosition] = 0;
         }
     }

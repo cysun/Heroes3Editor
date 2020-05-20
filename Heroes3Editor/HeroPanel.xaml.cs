@@ -48,6 +48,21 @@ namespace Heroes3Editor
             InitializeComponent();
         }
 
+        private void UpdateSkill(object sender, RoutedEventArgs e)
+        {
+            var cboBox = e.Source as ComboBox;
+            var slot = int.Parse(cboBox.Name.Substring("SkillSlot".Length));
+            var skill = cboBox.SelectedItem as string;
+
+            var oldNumOfSkills = _hero.NumOfSkills;
+            _hero.UpdateSkill(slot, skill);
+            if (_hero.NumOfSkills > oldNumOfSkills && _hero.NumOfSkills < 8)
+            {
+                var nextCboBox = FindName("SkillSlot" + _hero.NumOfSkills) as ComboBox;
+                nextCboBox.IsEnabled = true;
+            }
+        }
+
         private void AddSpell(object sender, RoutedEventArgs e)
         {
             var chkBox = e.Source as CheckBox;

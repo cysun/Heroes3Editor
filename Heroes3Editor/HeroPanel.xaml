@@ -22,14 +22,14 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ComboBox Name="SkillSlot0" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot2" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot3" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot4" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot5" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot6" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" />
-                <ComboBox Name="SkillSlot7" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" />
+                <ComboBox Name="SkillSlot0" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot2" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot3" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot4" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot5" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot6" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                <ComboBox Name="SkillSlot7" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Spells">
