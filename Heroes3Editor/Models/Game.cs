@@ -22,12 +22,7 @@ namespace Heroes3Editor.Models
             using var fileStream = (new FileInfo(file)).OpenRead();
             using var gzipStream = new GZipInputStream(fileStream);
             using var memoryStream = new MemoryStream();
-            try
-            {
-                gzipStream.CopyTo(memoryStream);
-            }
-            catch (GZipException e) { /* Ignore the CRC error */ }
-
+            gzipStream.CopyTo(memoryStream);
             Bytes = memoryStream.ToArray();
         }
 

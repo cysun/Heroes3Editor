@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+    <ProjectReference Include="..\SharpZipLib.GZip\SharpZipLib.GZip.csproj" />
   </ItemGroup>
 
   <ItemGroup>
