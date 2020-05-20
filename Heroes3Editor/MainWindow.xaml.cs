@@ -42,23 +42,10 @@ namespace Heroes3Editor
             {
                 Game = new Game(openDlg.FileName);
 
-                if (Game.Heroes.Count > 0)
-                {
-                    heroTabs.Items.Clear();
-                    foreach (var hero in Game.Heroes)
-                    {
-                        var heroTab = new TabItem()
-                        {
-                            Header = hero.Name
-                        };
-                        heroTab.Content = new HeroPanel()
-                        {
-                            Hero = hero
-                        };
-                        heroTabs.Items.Add(heroTab);
-                    }
-                    heroTabs.Visibility = Visibility.Visible;
-                }
+                heroTabs.Items.Clear();
+                heroTabs.Visibility = Visibility.Hidden;
+                heroCboBox.IsEnabled = true;
+                heroSearchBtn.IsEnabled = true;
 
                 status.Text = openDlg.FileName;
             }
@@ -82,6 +69,26 @@ namespace Heroes3Editor
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void SearchHero(object sender, RoutedEventArgs e)
+        {
+            var added = Game.SearchHero(heroCboBox.Text);
+            if (added)
+            {
+                var hero = Game.Heroes.Last();
+                var heroTab = new TabItem()
+                {
+                    Header = hero.Name
+                };
+                heroTab.Content = new HeroPanel()
+                {
+                    Hero = hero
+                };
+                heroTabs.Items.Add(heroTab);
+                heroTabs.Visibility = Visibility.Visible;
+                heroTab.IsSelected = true;
+            }
         }
     }
 }

@@ -29,8 +29,6 @@ namespace Heroes3Editor.Models
             catch (GZipException e) { /* Ignore the CRC error */ }
 
             Bytes = memoryStream.ToArray();
-
-            AddCampaignHeroes();
         }
 
         public void Save(string file)
@@ -41,13 +39,7 @@ namespace Heroes3Editor.Models
             memoryStream.CopyTo(gzipStream);
         }
 
-        public void AddCampaignHeroes()
-        {
-            foreach (var hero in Constants.Heroes)
-                AddHero(hero);
-        }
-
-        public bool AddHero(string name)
+        public bool SearchHero(string name)
         {
             foreach (var hero in Heroes)
                 if (hero.Name == name) return false;
