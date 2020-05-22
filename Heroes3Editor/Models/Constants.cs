@@ -29,14 +29,16 @@ namespace Heroes3Editor.Models
             "Gelare", "Grindan", "Inteus", "Labetha", "Luna"
         };
 
-        public static Dictionary<string, int> Offsets = new Dictionary<string, int>()
+        public static Dictionary<string, int> HeroOffsets = new Dictionary<string, int>()
         {
             {"Attributes", 69}, // Primary Skills
             {"NumOfSkills", -126},
             {"Skills", 13}, // Secondary Skills
             {"SkillSlots", 41},
             {"Spells", 73},
-            {"SpellBook", 143}
+            {"SpellBook", 143},
+            {"Creatures", -56},
+            {"CreatureAmounts", -28}
         };
     }
 

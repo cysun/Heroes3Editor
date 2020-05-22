@@ -38,19 +38,19 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                         <Label>Attack</Label>
-                        <TextBox Name="Attribute0" Margin="5,0,0,0"></TextBox>
+                        <TextBox Name="Attribute0" TextChanged="UpdateAttribute"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                         <Label>Defense</Label>
-                        <TextBox Name="Attribute1" Margin="5,0,0,0"></TextBox>
+                        <TextBox Name="Attribute1" TextChanged="UpdateAttribute"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
                         <Label>Spell Power</Label>
-                        <TextBox Name="Attribute2" Margin="5,0,0,0"></TextBox>
+                        <TextBox Name="Attribute2" TextChanged="UpdateAttribute"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3">
                         <Label>Knowledge</Label>
-                        <TextBox Name="Attribute3" Margin="5,0,0,0"></TextBox>
+                        <TextBox Name="Attribute3" TextChanged="UpdateAttribute"></TextBox>
                     </StackPanel>
                 </Grid>
             </GroupBox>
@@ -330,31 +330,31 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2">
-                        <ComboBox Name="CreatureSlot0" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature0" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount0"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="2">
-                        <ComboBox Name="CreatureSlot1" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature1" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount1"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="2">
-                        <ComboBox Name="CreatureSlot2" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature2" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount2"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" Margin="2">
-                        <ComboBox Name="CreatureSlot3" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature3" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount3"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="2">
-                        <ComboBox Name="CreatureSlot4" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature4" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount4"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="2">
-                        <ComboBox Name="CreatureSlot5" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature5" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount5"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="2">
-                        <ComboBox Name="CreatureSlot6" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <ComboBox Name="Creature6" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
                         <TextBox Name="CreatureAmount6"></TextBox>
                     </StackPanel>
                 </Grid>

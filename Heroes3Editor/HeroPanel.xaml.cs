@@ -47,6 +47,21 @@ namespace Heroes3Editor
                     var chkBox = FindName(spell) as CheckBox;
                     chkBox.IsChecked = true;
                 }
+
+                for (int i = 0; i < 7; ++i)
+                {
+                    var cboBox = FindName("Creature" + i) as ComboBox;
+                    var txtBox = FindName("CreatureAmount" + i) as TextBox;
+                    if (_hero.Creatures[i] != null)
+                    {
+                        cboBox.SelectedItem = _hero.Creatures[i];
+                        txtBox.Text = _hero.CreatureAmounts[i].ToString();
+                    }
+                    else
+                    {
+                        txtBox.IsEnabled = false;
+                    }
+                }
             }
         }
 
