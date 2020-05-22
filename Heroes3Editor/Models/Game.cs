@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using ICSharpCode.SharpZipLib.GZip;
 
@@ -67,9 +68,11 @@ namespace Heroes3Editor.Models
         private Game _game;
         private int _bytePosition;
 
+        public byte[] Attributes { get; } = new byte[4];
+
         private int _numOfSkills;
         public int NumOfSkills { get => _numOfSkills; }
-        public string[] Skills = new string[8];
+        public string[] Skills { get; } = new string[8];
 
         public ISet<string> Spells { get; } = new HashSet<string>();
 
@@ -78,6 +81,9 @@ namespace Heroes3Editor.Models
             Name = name;
             _game = game;
             _bytePosition = bytePosition;
+
+            for (int i = 0; i < 4; ++i)
+                Attributes[i] = _game.Bytes[_bytePosition + Constants.Offsets["Attributes"] + i];
 
             _numOfSkills = _game.Bytes[_bytePosition + Constants.Offsets["NumOfSkills"]];
             for (int i = 0; i < 28; ++i)
@@ -92,6 +98,12 @@ namespace Heroes3Editor.Models
                 if (_game.Bytes[_bytePosition + Constants.Offsets["Spells"] + i] == 1)
                     Spells.Add(Constants.Spells[i]);
             }
+        }
+
+        public void UpdateAttribute(int i, byte value)
+        {
+            Attributes[i] = value;
+            _game.Bytes[_bytePosition + Constants.Offsets["Attributes"] + i] = value;
         }
 
         public void UpdateSkill(int slot, string skill)

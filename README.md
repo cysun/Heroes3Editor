@@ -14,7 +14,7 @@ or complain about CRC error:
 * [GZipStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.compression.gzipstream?view=netcore-3.1):
   unsupported compression method exception
 * [sharpcompress](https://github.com/adamhathcock/sharpcompress): unsupported compression method exception
-* [SharpZipLib](https://github.com/icsharpcode/SharpZipLib): crc exception
+* [SharpZipLib](https://github.com/icsharpcode/SharpZipLib): CRC exception
 
 In particular, SharpZipLib can unzip it but will raise a CRC exception, which in some cases will stop halfway
 through uncompression. This is the reason why I included part of SharpZipLib 1.2.0 source code in this

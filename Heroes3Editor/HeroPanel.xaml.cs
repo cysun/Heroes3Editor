@@ -26,6 +26,13 @@ namespace Heroes3Editor
             set
             {
                 _hero = value;
+
+                for (int i = 0; i < 4; ++i)
+                {
+                    var txtBox = FindName("Attribute" + i) as TextBox;
+                    txtBox.Text = _hero.Attributes[i].ToString();
+                }
+
                 for (int i = 0; i < 8; ++i)
                 {
                     var cboBox = FindName("SkillSlot" + i) as ComboBox;
@@ -46,6 +53,18 @@ namespace Heroes3Editor
         public HeroPanel()
         {
             InitializeComponent();
+        }
+
+        private void UpdateAttribute(object sender, RoutedEventArgs e)
+        {
+            var txtBox = e.Source as TextBox;
+
+            byte value;
+            bool isNumber = byte.TryParse(txtBox.Text, out value);
+            if (!isNumber || value < 0 || value > 99) return;
+
+            var i = int.Parse(txtBox.Name.Substring("Attribute".Length));
+            _hero.UpdateAttribute(i, value);
         }
 
         private void UpdateSkill(object sender, RoutedEventArgs e)

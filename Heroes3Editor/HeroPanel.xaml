@@ -8,10 +8,53 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:Constants x:Key="constants"/>
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="InputScope" Value="Number" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+        </Style>
     </UserControl.Resources>
     <ScrollViewer>
         <StackPanel>
-            <GroupBox Header="Skills">
+            <GroupBox Header="Primary Skills">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                        <Label>Attack</Label>
+                        <TextBox Name="Attribute0" Margin="5,0,0,0"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                        <Label>Defense</Label>
+                        <TextBox Name="Attribute1" Margin="5,0,0,0"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+                        <Label>Spell Power</Label>
+                        <TextBox Name="Attribute2" Margin="5,0,0,0"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3">
+                        <Label>Knowledge</Label>
+                        <TextBox Name="Attribute3" Margin="5,0,0,0"></TextBox>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Secondary Skills">
                 <Grid DataContext="{Binding Source={StaticResource constants}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -34,11 +77,6 @@
                 </Grid>
             </GroupBox>
             <GroupBox Header="Spells">
-                <GroupBox.Resources>
-                    <Style TargetType="CheckBox">
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                    </Style>
-                </GroupBox.Resources>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -135,8 +173,8 @@
                             <CheckBox Name="Death_Ripple" Checked="AddSpell" Unchecked="RemoveSpell">
                                 <Label>Death Ripple</Label>
                             </CheckBox>
-                            <CheckBox Name="Quicksand" Checked="AddSpell" Unchecked="RemoveSpell">
-                                <Label>Quicksand</Label>
+                            <CheckBox Name="Quick_Sand" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Quick Sand</Label>
                             </CheckBox>
                             <CheckBox Name="Animate_Dead" Checked="AddSpell" Unchecked="RemoveSpell">
                                 <Label>Animate Dead</Label>
@@ -277,6 +315,48 @@
                             </CheckBox>
                         </StackPanel>
                     </GroupBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Creatures">
+                <Grid DataContext="{Binding Source={StaticResource constants}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2">
+                        <ComboBox Name="CreatureSlot0" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount0"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="2">
+                        <ComboBox Name="CreatureSlot1" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount1"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="2">
+                        <ComboBox Name="CreatureSlot2" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount2"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" Margin="2">
+                        <ComboBox Name="CreatureSlot3" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount3"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="2">
+                        <ComboBox Name="CreatureSlot4" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount4"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="2">
+                        <ComboBox Name="CreatureSlot5" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount5"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="2">
+                        <ComboBox Name="CreatureSlot6" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
+                        <TextBox Name="CreatureAmount6"></TextBox>
+                    </StackPanel>
                 </Grid>
             </GroupBox>
         </StackPanel>
