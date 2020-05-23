@@ -15,6 +15,9 @@
         <Style TargetType="CheckBox">
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="130" />
+        </Style>
         <Style TargetType="TextBox">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -66,14 +69,38 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ComboBox Name="SkillSlot0" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot2" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot3" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot4" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot5" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot6" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
-                    <ComboBox Name="SkillSlot7" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2">
+                        <ComboBox Name="Skill0" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel0" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="2">
+                        <ComboBox Name="Skill1" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel1" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="2">
+                        <ComboBox Name="Skill2" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel2" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" Margin="2">
+                        <ComboBox Name="Skill3" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel3" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="2">
+                        <ComboBox Name="Skill4" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel4" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="2">
+                        <ComboBox Name="Skill5" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel5" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="2">
+                        <ComboBox Name="Skill6" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel6" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3" Margin="2">
+                        <ComboBox Name="Skill7" ItemsSource="{Binding Path=Skills.Names}" SelectionChanged="UpdateSkill" />
+                        <TextBox Name="SkillLevel7" TextChanged="UpdateSkillLevel"></TextBox>
+                    </StackPanel>
                 </Grid>
             </GroupBox>
             <GroupBox Header="Spells">
@@ -330,31 +357,31 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2">
-                        <ComboBox Name="Creature0" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature0" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount0" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="2">
-                        <ComboBox Name="Creature1" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature1" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount1" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="2">
-                        <ComboBox Name="Creature2" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature2" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount2" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" Margin="2">
-                        <ComboBox Name="Creature3" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature3" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount3" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="2">
-                        <ComboBox Name="Creature4" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature4" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount4" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="2">
-                        <ComboBox Name="Creature5" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature5" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount5" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="2">
-                        <ComboBox Name="Creature6" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <ComboBox Name="Creature6" ItemsSource="{Binding Path=Creatures.Names}" SelectionChanged="UpdateCreature" />
                         <TextBox Name="CreatureAmount6" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                 </Grid>

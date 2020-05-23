@@ -74,6 +74,7 @@ namespace Heroes3Editor.Models
         private int _numOfSkills;
         public int NumOfSkills { get => _numOfSkills; }
         public string[] Skills { get; } = new string[8];
+        public byte[] SkillLevels { get; } = new byte[8];
 
         public ISet<string> Spells { get; } = new HashSet<string>();
 
@@ -94,7 +95,10 @@ namespace Heroes3Editor.Models
             {
                 var skillSlotIndex = _game.Bytes[_bytePosition + Constants.HeroOffsets["SkillSlots"] + i];
                 if (skillSlotIndex != 0)
+                {
                     Skills[skillSlotIndex - 1] = Constants.Skills[i];
+                    SkillLevels[skillSlotIndex - 1] = _game.Bytes[_bytePosition + Constants.HeroOffsets["Skills"] + i];
+                }
             }
 
             for (int i = 0; i < 70; ++i)
@@ -143,6 +147,7 @@ namespace Heroes3Editor.Models
             }
 
             Skills[slot] = skill;
+            SkillLevels[slot] = skillLevel;
             _game.Bytes[_bytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[skill]] = skillLevel;
             _game.Bytes[_bytePosition + Constants.HeroOffsets["SkillSlots"] + Constants.Skills[skill]] = (byte)(slot + 1);
 
@@ -151,6 +156,14 @@ namespace Heroes3Editor.Models
                 ++_numOfSkills;
                 _game.Bytes[_bytePosition + Constants.HeroOffsets["NumOfSkills"]] = (byte)_numOfSkills;
             }
+        }
+
+        public void UpdateSkillLevel(int slot, byte level)
+        {
+            if (slot < 0 || slot > _numOfSkills || level < 1 || level > 3) return;
+
+            SkillLevels[slot] = level;
+            _game.Bytes[_bytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[Skills[slot]]] = level;
         }
 
         public void AddSpell(string spell)

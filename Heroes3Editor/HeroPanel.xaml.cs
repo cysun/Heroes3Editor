@@ -35,11 +35,22 @@ namespace Heroes3Editor
 
                 for (int i = 0; i < 8; ++i)
                 {
-                    var cboBox = FindName("SkillSlot" + i) as ComboBox;
+                    var cboBox = FindName("Skill" + i) as ComboBox;
+                    var txtBox = FindName("SkillLevel" + i) as TextBox;
                     if (i < _hero.NumOfSkills)
+                    {
                         cboBox.SelectedItem = _hero.Skills[i];
+                        txtBox.Text = _hero.SkillLevels[i].ToString();
+                    }
                     else if (i > _hero.NumOfSkills)
+                    {
                         cboBox.IsEnabled = false;
+                        txtBox.IsEnabled = false;
+                    }
+                    else
+                    {
+                        txtBox.IsEnabled = false;
+                    }
                 }
 
                 foreach (var spell in _hero.Spells)
@@ -85,16 +96,36 @@ namespace Heroes3Editor
         private void UpdateSkill(object sender, RoutedEventArgs e)
         {
             var cboBox = e.Source as ComboBox;
-            var slot = int.Parse(cboBox.Name.Substring("SkillSlot".Length));
+            var slot = int.Parse(cboBox.Name.Substring("Skill".Length));
             var skill = cboBox.SelectedItem as string;
 
             var oldNumOfSkills = _hero.NumOfSkills;
             _hero.UpdateSkill(slot, skill);
-            if (_hero.NumOfSkills > oldNumOfSkills && _hero.NumOfSkills < 8)
+
+            if (_hero.NumOfSkills > oldNumOfSkills)
             {
-                var nextCboBox = FindName("SkillSlot" + _hero.NumOfSkills) as ComboBox;
-                nextCboBox.IsEnabled = true;
+                var txtBox = FindName("SkillLevel" + slot) as TextBox;
+                txtBox.Text = _hero.SkillLevels[slot].ToString();
+                txtBox.IsEnabled = true;
+
+                if (_hero.NumOfSkills < 8)
+                {
+                    var nextCboBox = FindName("Skill" + _hero.NumOfSkills) as ComboBox;
+                    nextCboBox.IsEnabled = true;
+                }
             }
+        }
+
+        private void UpdateSkillLevel(object sender, RoutedEventArgs e)
+        {
+            var txtBox = e.Source as TextBox;
+            var slot = int.Parse(txtBox.Name.Substring("SkillLevel".Length));
+
+            byte level;
+            bool isNumber = byte.TryParse(txtBox.Text, out level);
+            if (!isNumber || level < 0 || level > 3) return;
+
+            _hero.UpdateSkillLevel(slot, level);
         }
 
         private void AddSpell(object sender, RoutedEventArgs e)
