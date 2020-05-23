@@ -174,5 +174,23 @@ namespace Heroes3Editor.Models
             int spellBookPosition = _bytePosition + Constants.HeroOffsets["SpellBook"] + Constants.Spells[spell];
             _game.Bytes[spellBookPosition] = 0;
         }
+
+        public void UpdateCreature(int i, string creature)
+        {
+            if (Creatures[i] == null)
+            {
+                CreatureAmounts[i] = 1;
+                UpdateCreatureAmount(i, 1);
+            }
+
+            Creatures[i] = creature;
+            _game.Bytes[_bytePosition + Constants.HeroOffsets["Creatures"] + i * 4] = Constants.Creatures[creature];
+        }
+
+        public void UpdateCreatureAmount(int i, int amount)
+        {
+            var amountBytes = _game.Bytes.AsSpan().Slice(_bytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
+            BinaryPrimitives.WriteInt32LittleEndian(amountBytes, amount);
+        }
     }
 }

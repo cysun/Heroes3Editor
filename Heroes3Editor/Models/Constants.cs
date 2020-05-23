@@ -321,6 +321,6 @@ namespace Heroes3Editor.Models
 
         public string this[byte key] => _namesByCode[key];
 
-        public int this[string key] => _codesByName[key];
+        public byte this[string key] => _codesByName[key];
     }
 }

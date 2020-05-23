@@ -108,5 +108,32 @@ namespace Heroes3Editor
             var chkBox = e.Source as CheckBox;
             _hero.RemoveSpell(chkBox.Name);
         }
+
+        private void UpdateCreature(object sender, RoutedEventArgs e)
+        {
+            var cboBox = e.Source as ComboBox;
+            var i = int.Parse(cboBox.Name.Substring("Creature".Length));
+            var creature = cboBox.SelectedItem as string;
+
+            _hero.UpdateCreature(i, creature);
+            var txtBox = FindName("CreatureAmount" + i) as TextBox;
+            if (!txtBox.IsEnabled)
+            {
+                txtBox.Text = _hero.CreatureAmounts[i].ToString();
+                txtBox.IsEnabled = true;
+            }
+        }
+
+        private void UpdateCreatureAmount(object sender, RoutedEventArgs e)
+        {
+            var txtBox = e.Source as TextBox;
+            var i = int.Parse(txtBox.Name.Substring("CreatureAmount".Length));
+
+            int amount;
+            bool isNumber = int.TryParse(txtBox.Text, out amount);
+            if (!isNumber || amount < 0 || amount > 9999) return;
+
+            _hero.UpdateCreatureAmount(i, amount);
+        }
     }
 }

@@ -330,32 +330,32 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2">
-                        <ComboBox Name="Creature0" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount0"></TextBox>
+                        <ComboBox Name="Creature0" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount0" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="2">
-                        <ComboBox Name="Creature1" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount1"></TextBox>
+                        <ComboBox Name="Creature1" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount1" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="2">
-                        <ComboBox Name="Creature2" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount2"></TextBox>
+                        <ComboBox Name="Creature2" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount2" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" Margin="2">
-                        <ComboBox Name="Creature3" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount3"></TextBox>
+                        <ComboBox Name="Creature3" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount3" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="2">
-                        <ComboBox Name="Creature4" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount4"></TextBox>
+                        <ComboBox Name="Creature4" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount4" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="2">
-                        <ComboBox Name="Creature5" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount5"></TextBox>
+                        <ComboBox Name="Creature5" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount5" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="2">
-                        <ComboBox Name="Creature6" ItemsSource="{Binding Path=Creatures.Names}" Width="130" />
-                        <TextBox Name="CreatureAmount6"></TextBox>
+                        <ComboBox Name="Creature6" ItemsSource="{Binding Path=Creatures.Names}" Width="130" SelectionChanged="UpdateCreature" />
+                        <TextBox Name="CreatureAmount6" TextChanged="UpdateCreatureAmount"></TextBox>
                     </StackPanel>
                 </Grid>
             </GroupBox>
