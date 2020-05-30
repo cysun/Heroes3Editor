@@ -224,6 +224,9 @@
                             <CheckBox Name="Resurrection" Checked="AddSpell" Unchecked="RemoveSpell">
                                 <Label>Resurrection</Label>
                             </CheckBox>
+                            <CheckBox Name="Sorrow" Checked="AddSpell" Unchecked="RemoveSpell">
+                                <Label>Sorrow</Label>
+                            </CheckBox>
                             <CheckBox Name="Town_Portal" Checked="AddSpell" Unchecked="RemoveSpell">
                                 <Label>Town Portal</Label>
                             </CheckBox>
