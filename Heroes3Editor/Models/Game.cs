@@ -38,12 +38,28 @@ namespace Heroes3Editor.Models
 
         public bool SearchHero(string name)
         {
+            int startPosition = Bytes.Length;
             foreach (var hero in Heroes)
-                if (hero.Name == name) return false;
+            {
+                if (hero.Name == name && startPosition > hero.BytePosition)
+                    startPosition = hero.BytePosition - 1;
+            }
 
+            var bytePosition = SearchHero(name, startPosition);
+            if (bytePosition > 0)
+            {
+                Heroes.Add(new Hero(name, this, bytePosition));
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private int SearchHero(string name, int startPosition)
+        {
             byte[] pattern = new byte[13];
             Encoding.ASCII.GetBytes(name).CopyTo(pattern, 0);
-            for (int i = Bytes.Length - 13; i > 0; --i)
+            for (int i = startPosition - 13; i > 0; --i)
             {
                 bool found = true;
                 for (int j = 0; j < 13; ++j)
@@ -53,12 +69,9 @@ namespace Heroes3Editor.Models
                         break;
                     }
                 if (found)
-                {
-                    Heroes.Add(new Hero(name, this, i));
-                    return true;
-                }
+                    return i;
             }
-            return false;
+            return -1;
         }
     }
 
@@ -67,12 +80,11 @@ namespace Heroes3Editor.Models
         public string Name { get; }
 
         private Game _game;
-        private int _bytePosition;
+
+        public int BytePosition { get; }
 
         public byte[] Attributes { get; } = new byte[4];
-
-        private int _numOfSkills;
-        public int NumOfSkills { get => _numOfSkills; }
+        public int NumOfSkills { get; private set; }
         public string[] Skills { get; } = new string[8];
         public byte[] SkillLevels { get; } = new byte[8];
 
@@ -85,35 +97,35 @@ namespace Heroes3Editor.Models
         {
             Name = name;
             _game = game;
-            _bytePosition = bytePosition;
+            BytePosition = bytePosition;
 
             for (int i = 0; i < 4; ++i)
-                Attributes[i] = _game.Bytes[_bytePosition + Constants.HeroOffsets["Attributes"] + i];
+                Attributes[i] = _game.Bytes[BytePosition + Constants.HeroOffsets["Attributes"] + i];
 
-            _numOfSkills = _game.Bytes[_bytePosition + Constants.HeroOffsets["NumOfSkills"]];
+            NumOfSkills = _game.Bytes[BytePosition + Constants.HeroOffsets["NumOfSkills"]];
             for (int i = 0; i < 28; ++i)
             {
-                var skillSlotIndex = _game.Bytes[_bytePosition + Constants.HeroOffsets["SkillSlots"] + i];
+                var skillSlotIndex = _game.Bytes[BytePosition + Constants.HeroOffsets["SkillSlots"] + i];
                 if (skillSlotIndex != 0)
                 {
                     Skills[skillSlotIndex - 1] = Constants.Skills[i];
-                    SkillLevels[skillSlotIndex - 1] = _game.Bytes[_bytePosition + Constants.HeroOffsets["Skills"] + i];
+                    SkillLevels[skillSlotIndex - 1] = _game.Bytes[BytePosition + Constants.HeroOffsets["Skills"] + i];
                 }
             }
 
             for (int i = 0; i < 70; ++i)
             {
-                if (_game.Bytes[_bytePosition + Constants.HeroOffsets["Spells"] + i] == 1)
+                if (_game.Bytes[BytePosition + Constants.HeroOffsets["Spells"] + i] == 1)
                     Spells.Add(Constants.Spells[i]);
             }
 
             for (int i = 0; i < 7; ++i)
             {
-                var code = _game.Bytes[_bytePosition + Constants.HeroOffsets["Creatures"] + i * 4];
+                var code = _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4];
                 if (code != 0xFF)
                 {
                     Creatures[i] = Constants.Creatures[code];
-                    var amountBytes = _game.Bytes.AsSpan().Slice(_bytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
+                    var amountBytes = _game.Bytes.AsSpan().Slice(BytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
                     CreatureAmounts[i] = BinaryPrimitives.ReadInt16LittleEndian(amountBytes);
                 }
                 else
@@ -126,54 +138,54 @@ namespace Heroes3Editor.Models
         public void UpdateAttribute(int i, byte value)
         {
             Attributes[i] = value;
-            _game.Bytes[_bytePosition + Constants.HeroOffsets["Attributes"] + i] = value;
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Attributes"] + i] = value;
         }
 
         public void UpdateSkill(int slot, string skill)
         {
-            if (slot < 0 || slot > _numOfSkills) return;
-            for (int i = 0; i < _numOfSkills; ++i)
+            if (slot < 0 || slot > NumOfSkills) return;
+            for (int i = 0; i < NumOfSkills; ++i)
                 if (Skills[i] == skill) return;
 
             byte skillLevel = 1;
 
-            if (slot < _numOfSkills)
+            if (slot < NumOfSkills)
             {
                 var oldSkill = Skills[slot];
-                var oldSkillLevelPosition = _bytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[oldSkill];
+                var oldSkillLevelPosition = BytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[oldSkill];
                 skillLevel = _game.Bytes[oldSkillLevelPosition];
                 _game.Bytes[oldSkillLevelPosition] = 0;
-                _game.Bytes[_bytePosition + Constants.HeroOffsets["SkillSlots"] + Constants.Skills[oldSkill]] = 0;
+                _game.Bytes[BytePosition + Constants.HeroOffsets["SkillSlots"] + Constants.Skills[oldSkill]] = 0;
             }
 
             Skills[slot] = skill;
             SkillLevels[slot] = skillLevel;
-            _game.Bytes[_bytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[skill]] = skillLevel;
-            _game.Bytes[_bytePosition + Constants.HeroOffsets["SkillSlots"] + Constants.Skills[skill]] = (byte)(slot + 1);
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[skill]] = skillLevel;
+            _game.Bytes[BytePosition + Constants.HeroOffsets["SkillSlots"] + Constants.Skills[skill]] = (byte)(slot + 1);
 
-            if (slot == _numOfSkills)
+            if (slot == NumOfSkills)
             {
-                ++_numOfSkills;
-                _game.Bytes[_bytePosition + Constants.HeroOffsets["NumOfSkills"]] = (byte)_numOfSkills;
+                ++NumOfSkills;
+                _game.Bytes[BytePosition + Constants.HeroOffsets["NumOfSkills"]] = (byte)NumOfSkills;
             }
         }
 
         public void UpdateSkillLevel(int slot, byte level)
         {
-            if (slot < 0 || slot > _numOfSkills || level < 1 || level > 3) return;
+            if (slot < 0 || slot > NumOfSkills || level < 1 || level > 3) return;
 
             SkillLevels[slot] = level;
-            _game.Bytes[_bytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[Skills[slot]]] = level;
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Skills"] + Constants.Skills[Skills[slot]]] = level;
         }
 
         public void AddSpell(string spell)
         {
             if (!Spells.Add(spell)) return;
 
-            int spellPosition = _bytePosition + Constants.HeroOffsets["Spells"] + Constants.Spells[spell];
+            int spellPosition = BytePosition + Constants.HeroOffsets["Spells"] + Constants.Spells[spell];
             _game.Bytes[spellPosition] = 1;
 
-            int spellBookPosition = _bytePosition + Constants.HeroOffsets["SpellBook"] + Constants.Spells[spell];
+            int spellBookPosition = BytePosition + Constants.HeroOffsets["SpellBook"] + Constants.Spells[spell];
             _game.Bytes[spellBookPosition] = 1;
         }
 
@@ -181,10 +193,10 @@ namespace Heroes3Editor.Models
         {
             if (!Spells.Remove(spell)) return;
 
-            int spellPosition = _bytePosition + Constants.HeroOffsets["Spells"] + Constants.Spells[spell];
+            int spellPosition = BytePosition + Constants.HeroOffsets["Spells"] + Constants.Spells[spell];
             _game.Bytes[spellPosition] = 0;
 
-            int spellBookPosition = _bytePosition + Constants.HeroOffsets["SpellBook"] + Constants.Spells[spell];
+            int spellBookPosition = BytePosition + Constants.HeroOffsets["SpellBook"] + Constants.Spells[spell];
             _game.Bytes[spellBookPosition] = 0;
         }
 
@@ -197,12 +209,12 @@ namespace Heroes3Editor.Models
             }
 
             Creatures[i] = creature;
-            _game.Bytes[_bytePosition + Constants.HeroOffsets["Creatures"] + i * 4] = Constants.Creatures[creature];
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4] = Constants.Creatures[creature];
         }
 
         public void UpdateCreatureAmount(int i, int amount)
         {
-            var amountBytes = _game.Bytes.AsSpan().Slice(_bytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
+            var amountBytes = _game.Bytes.AsSpan().Slice(BytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
             BinaryPrimitives.WriteInt32LittleEndian(amountBytes, amount);
         }
     }
