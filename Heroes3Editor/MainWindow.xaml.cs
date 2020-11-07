@@ -38,7 +38,7 @@ namespace Heroes3Editor
 
         private void OpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var openDlg = new OpenFileDialog { Filter = "HoMM3 Savegames |*.CGM" };
+            var openDlg = new OpenFileDialog { Filter = "HoMM3 Savegames |*.CGM;*.GM1" };
             if (openDlg.ShowDialog() == true)
             {
                 Game = new Game(openDlg.FileName);
@@ -59,7 +59,7 @@ namespace Heroes3Editor
 
         private void SaveCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var saveDlg = new SaveFileDialog { Filter = "HoMM3 Savegames |*.CGM" };
+            var saveDlg = new SaveFileDialog { Filter = "HoMM3 Savegames |*.CGM;*.GM1" };
             if (saveDlg.ShowDialog() == true)
             {
                 Game.Save(saveDlg.FileName);
