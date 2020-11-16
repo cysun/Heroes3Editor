@@ -262,24 +262,14 @@ namespace Heroes3Editor.Models
 
         public void UpdateCreature(int i, string creature)
         {
-            if (!creature.Contains("None"))
+            if (Creatures[i] == null)
             {
-                if (Creatures[i] == null)
-                {
-                    CreatureAmounts[i] = 1;
-                    UpdateCreatureAmount(i, 1);
-                }
-
-                Creatures[i] = creature;
-                _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4] = Constants.Creatures[creature];
-            }
-            else
-            {
-                Creatures[i] = null;
-                CreatureAmounts[i] = 0;
+                CreatureAmounts[i] = 1;
                 UpdateCreatureAmount(i, 1);
             }
 
+            Creatures[i] = creature;
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4] = Constants.Creatures[creature];
         }
 
         public void UpdateCreatureAmount(int i, int amount)

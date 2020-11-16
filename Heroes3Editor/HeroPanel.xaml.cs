@@ -199,22 +199,12 @@ namespace Heroes3Editor
             var i = int.Parse(cboBox.Name.Substring("Creature".Length));
             var creature = cboBox.SelectedItem as string;
 
-            if (!creature.Contains("None"))
+            _hero.UpdateCreature(i, creature);
+            var txtBox = FindName("CreatureAmount" + i) as TextBox;
+            if (!txtBox.IsEnabled)
             {
-                _hero.UpdateCreature(i, creature);
-                var txtBox = FindName("CreatureAmount" + i) as TextBox;
-                if (!txtBox.IsEnabled)
-                {
-                    txtBox.Text = _hero.CreatureAmounts[i].ToString();
-                    txtBox.IsEnabled = true;
-                }
-            }
-            else
-            {
-                _hero.CreatureAmounts[i] = 0;
-                var txtBox = FindName("CreatureAmount" + i) as TextBox;
-                txtBox.Text = "";
-                txtBox.IsEnabled = false;
+                txtBox.Text = _hero.CreatureAmounts[i].ToString();
+                txtBox.IsEnabled = true;
             }
         }
 
