@@ -17,6 +17,7 @@ namespace Heroes3Editor.Models
         public static Boots Boots { get; } = new Boots();
         public static Neck Neck { get; } = new Neck();
         public static Items Items { get; } = new Items();
+        public static WarMachines WarMachines { get; } = new WarMachines();
 
         public static string[] Heroes { get; } =
         {
@@ -374,7 +375,25 @@ namespace Heroes3Editor.Models
         public string this[byte key] => _namesByCode[key];
 
         public byte this[string key] => _codesByName[key];
-}
+    }
+
+    public class WarMachines
+    {
+        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        {
+            {0x04, "Ballista" },
+            {0x05, "Ammo Cart" },
+            {0x06, "First Aid Tent" }
+        };
+
+        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
+
+        public string[] Names { get; } = _namesByCode.Values.ToArray();
+
+        public string this[byte key] => _namesByCode[key];
+
+        public byte this[string key] => _codesByName[key];
+    }
 
     public class Artifacts
     {

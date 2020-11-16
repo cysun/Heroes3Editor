@@ -479,6 +479,29 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Item Slots</TextBlock>
                     </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Ballista</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <CheckBox Name="Ballista" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="AddBallista" Unchecked="RemoveBallista"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">First Aid Tent</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="2" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <CheckBox Name="FirstAidTent" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="AddFirstAidTent" Unchecked="RemoveFirstAidTent"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Ammo Cart</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <CheckBox Name="AmmoCart" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="AddAmmoCart" Unchecked="RemoveAmmoCart"/>
+                    </StackPanel>
+
+
                     <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ComboBox Name="CurrentSlot1" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot1" />
                     </StackPanel>

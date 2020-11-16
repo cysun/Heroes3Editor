@@ -126,7 +126,22 @@ namespace Heroes3Editor
                 artifact = _hero.Slot4;
                 artifactCboBox = FindName("CurrentSlot4") as ComboBox;
                 artifactCboBox.SelectedItem = artifact;
+
+                artifact = _hero.Ballista;
+                var artifactChkBox = FindName("Ballista") as CheckBox;
+                artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
+
+                artifact = _hero.FirstAidTent;
+                artifactChkBox = FindName("FirstAidTent") as CheckBox;
+                artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
+
+                artifact = _hero.AmmoCart;
+                artifactChkBox = FindName("AmmoCart") as CheckBox;
+                artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
             }
+
+            // Checkboxes for these
+            // Spell Book - In the Spell Section 
         }
 
         public HeroPanel()
@@ -225,7 +240,7 @@ namespace Heroes3Editor
             var cboBox = e.Source as ComboBox;
             var weapon = cboBox.SelectedItem as string;
 
-            _hero.UpdateWeapon(weapon); 
+            _hero.UpdateWeapon(weapon);
         }
 
         private void UpdateRightRing(object sender, RoutedEventArgs e)
@@ -259,7 +274,7 @@ namespace Heroes3Editor
 
             _hero.UpdateSlot1(item);
         }
-        
+
         private void UpdateSlot2(object sender, RoutedEventArgs e)
         {
             var cboBox = e.Source as ComboBox;
@@ -322,6 +337,42 @@ namespace Heroes3Editor
             var boots = cboBox.SelectedItem as string;
 
             _hero.UpdateBoots(boots);
+        }
+
+        private void AddBallista(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.AddBallista("Ballista");
+        }
+
+        private void RemoveBallista(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.RemoveBallista("Ballista");
+        }
+
+        private void AddFirstAidTent(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.AddFirstAidTent("First Aid Tent");
+        }
+
+        private void RemoveFirstAidTent(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.RemoveFirstAidTent("First Aid Tent");
+        }
+
+        private void AddAmmoCart(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.AddAmmoCart("Ammo Cart");
+        }
+
+        private void RemoveAmmoCart(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.RemoveAmmoCart("Ammo Cart");
         }
     }
 }
