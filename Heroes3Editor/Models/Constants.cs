@@ -613,7 +613,6 @@ namespace Heroes3Editor.Models
     {
         private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
         {
-            {0xFF, "None" },
             {0x00, "Pikeman"},
             {0x01, "Halberdier"},
             {0x02, "Archer"},
