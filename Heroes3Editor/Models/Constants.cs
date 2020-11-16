@@ -298,11 +298,12 @@ namespace Heroes3Editor.Models
             {0x2D, "Still Eye of the Dragon" },
             {0x43, "Diplomat Ring" },
             {0x45, "Ring of the Wayfarer" },
+            {0x46, "Equestrian's Gloves" },
             {0x4D, "Ring of Conjuring" },
             {0x5E, "Ring of Vitality" },
             {0x5F, "Ring of Life" },
             {0x6E, "Ring of Infinite Gems" },
-            {0x71, "Eversmoking Ring of Sulfur" },
+            {0x71, "Eversmoking Ring of Sulfur" }
         };
 
         private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
@@ -334,7 +335,6 @@ namespace Heroes3Editor.Models
             {0x40, "Stoic Watchman" },
             {0x41, "Emblem of Cognizance" },
             {0x42, "Statesmen's Medal" },
-            {0x46, "Equestrian's Gloves" },
             {0x49, "Charm of Mana" },
             {0x4A, "Talisman of Mana" },
             {0x4B, "Mystic Orb of Mana" },

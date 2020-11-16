@@ -270,6 +270,9 @@ namespace Heroes3Editor.Models
 
             Creatures[i] = creature;
             _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4] = Constants.Creatures[creature];
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + (i * 4) + 1] = ON;
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + (i * 4) + 2] = ON;
+            _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + (i * 4) + 3] = ON;
         }
 
         public void UpdateCreatureAmount(int i, int amount)
