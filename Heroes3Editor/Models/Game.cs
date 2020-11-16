@@ -50,20 +50,6 @@ namespace Heroes3Editor.Models
             if (bytePosition > 0)
             {
                 Heroes.Add(new Hero(name, this, bytePosition));
-
-                Debug.WriteLine("Hero byte start position: " + bytePosition + "\n" + "Hero: " + name);
-                string output = "";
-                int start = 414416;
-                for (int i = start; i < Bytes.Length; i++)
-                {
-                    if (i > (start + 2000))
-                    {
-                        break;
-                    }
-                    output += "\nByte # :" + i + " Value : " + Bytes[i] + " / ";
-                }
-                Debug.WriteLine("Bytes: " + output);
-
                 return true;
             }
             else
