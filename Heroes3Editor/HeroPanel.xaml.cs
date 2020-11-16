@@ -235,9 +235,6 @@ namespace Heroes3Editor
             var cboBox = e.Source as ComboBox;
             var weapon = cboBox.SelectedItem as string;
 
-            //var textBlockWeapon = FindName("CurrentWeapon") as TextBlock;
-            //textBlockWeapon.Text = weapon;
-
             _hero.UpdateWeapon(weapon); 
         }
 
