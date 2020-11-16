@@ -1,21 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop" ToolsVersion="Current">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>App.ico</ApplicationIcon>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\freak\Downloads\Heroes3Editor-master\Backup\Heroes3Editor\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SharpZipLib.GZip\SharpZipLib.GZip.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Resources\VS2019\Exit_16x.png" />
     <Resource Include="Resources\VS2019\OpenFile_16x.png" />
     <Resource Include="Resources\VS2019\Save_16x.png" />
     <Resource Include="Resources\VS2019\Search_16x.png" />
   </ItemGroup>
-
 </Project>
