@@ -106,6 +106,7 @@ namespace Heroes3Editor.Models
         public string Slot2 { get; set; } = "";
         public string Slot3 { get; set; } = "";
         public string Slot4 { get; set; } = "";
+        public string Slot5 { get; set; } = "";
         public string Ballista { get; set; } = "";
         public string FirstAidTent { get; set; } = "";
         public string AmmoCart { get; set; } = "";
@@ -195,6 +196,9 @@ namespace Heroes3Editor.Models
 
             hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Slot4"]];
             Slot4 = Constants.Items[hexCode];
+
+            hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Slot5"]];
+            Slot5 = Constants.Items[hexCode];
 
             hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Ballista"]];
             Ballista = Constants.Items[hexCode];
@@ -454,6 +458,27 @@ namespace Heroes3Editor.Models
             else
             {
                 int currentBytePos = BytePosition + Constants.HeroOffsets["Slot4"];
+                _game.Bytes[currentBytePos] = OFF;
+                _game.Bytes[currentBytePos + 1] = OFF;
+                _game.Bytes[currentBytePos + 2] = OFF;
+                _game.Bytes[currentBytePos + 3] = OFF;
+            }
+        }
+
+        public void UpdateSlot5(string artifact)
+        {
+            if (!artifact.Contains("None"))
+            {
+                Slot5 = artifact;
+                int currentBytePos = BytePosition + Constants.HeroOffsets["Slot5"];
+                _game.Bytes[currentBytePos] = Constants.Items[artifact];
+                _game.Bytes[currentBytePos + 1] = ON;
+                _game.Bytes[currentBytePos + 2] = ON;
+                _game.Bytes[currentBytePos + 3] = ON;
+            }
+            else
+            {
+                int currentBytePos = BytePosition + Constants.HeroOffsets["Slot5"];
                 _game.Bytes[currentBytePos] = OFF;
                 _game.Bytes[currentBytePos + 1] = OFF;
                 _game.Bytes[currentBytePos + 2] = OFF;

@@ -127,6 +127,10 @@ namespace Heroes3Editor
                 artifactCboBox = FindName("CurrentSlot4") as ComboBox;
                 artifactCboBox.SelectedItem = artifact;
 
+                artifact = _hero.Slot5;
+                artifactCboBox = FindName("CurrentSlot5") as ComboBox;
+                artifactCboBox.SelectedItem = artifact;
+
                 artifact = _hero.Ballista;
                 var artifactChkBox = FindName("Ballista") as CheckBox;
                 artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
@@ -297,6 +301,14 @@ namespace Heroes3Editor
             var item = cboBox.SelectedItem as string;
 
             _hero.UpdateSlot4(item);
+        }
+
+        private void UpdateSlot5(object sender, RoutedEventArgs e)
+        {
+            var cboBox = e.Source as ComboBox;
+            var item = cboBox.SelectedItem as string;
+
+            _hero.UpdateSlot5(item);
         }
 
         private void UpdateNeck(object sender, RoutedEventArgs e)

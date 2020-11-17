@@ -389,7 +389,20 @@
                     </StackPanel>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Equipped_Artifacts">
+            <GroupBox Header="War Machines">
+                <WrapPanel>
+                    <CheckBox Name="Ballista" Checked="AddBallista" Unchecked="RemoveBallista">
+                        <Label>Ballista</Label>
+                    </CheckBox>
+                    <CheckBox Name="AmmoCart" Checked="AddAmmoCart" Unchecked="RemoveAmmoCart">
+                        <Label>Ammo Cart</Label>
+                    </CheckBox>
+                    <CheckBox Name="FirstAidTent" Checked="AddFirstAidTent" Unchecked="RemoveFirstAidTent">
+                        <Label>First Aid Tent</Label>
+                    </CheckBox>
+                </WrapPanel>
+            </GroupBox>
+            <GroupBox Header="Equipped Artifacts">
                 <Grid DataContext="{Binding Source={StaticResource constants}}" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -398,122 +411,57 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Weapon</TextBlock>
+                    <Grid.Resources>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Width" Value="200" />
+                        </Style>
+                    </Grid.Resources>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <GroupBox Header="Helm">
+                            <ComboBox Name="CurrentHelm" ItemsSource="{Binding Path=Helms.Names}" SelectionChanged="UpdateHelm" />
+                        </GroupBox>
+                        <GroupBox Header="Neck">
+                            <ComboBox Name="CurrentNeck" ItemsSource="{Binding Path=Neck.Names}" SelectionChanged="UpdateNeck" />
+                        </GroupBox>
+                        <GroupBox Header="Armor">
+                            <ComboBox Name="CurrentArmor" ItemsSource="{Binding Path=Armor.Names}" SelectionChanged="UpdateArmor" />
+                        </GroupBox>
+                        <GroupBox Header="Cloak">
+                            <ComboBox Name="CurrentCloak" ItemsSource="{Binding Path=Cloak.Names}" SelectionChanged="UpdateCloak" />
+                        </GroupBox>
+                        <GroupBox Header="Boots">
+                            <ComboBox Name="CurrentBoots" ItemsSource="{Binding Path=Boots.Names}" SelectionChanged="UpdateBoots" />
+                        </GroupBox>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentWeapon" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Weapons.Names}" SelectionChanged="UpdateWeapon" />
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <GroupBox Header="Weapon">
+                            <ComboBox Name="CurrentWeapon" ItemsSource="{Binding Path=Weapons.Names}" SelectionChanged="UpdateWeapon" />
+                        </GroupBox>
+                        <GroupBox Header="Shield">
+                            <ComboBox Name="CurrentShield" ItemsSource="{Binding Path=Shields.Names}" SelectionChanged="UpdateShield" />
+                        </GroupBox>
+                        <GroupBox Header="Left Ring">
+                            <ComboBox Name="CurrentLeftRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateLeftRing" />
+                        </GroupBox>
+                        <GroupBox Header="Right Ring">
+                            <ComboBox Name="CurrentRightRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateRightRing" />
+                        </GroupBox>
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Helm</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentHelm" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Helms.Names}" SelectionChanged="UpdateHelm" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Shield</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentShield" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Shields.Names}" SelectionChanged="UpdateShield" />
-                    </StackPanel>
-
-                    
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Left Ring</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentLeftRing" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateLeftRing" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Neck</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentNeck" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Neck.Names}" SelectionChanged="UpdateNeck" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Right Ring</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentRightRing" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateRightRing" />
-                    </StackPanel>
-
-                    
-                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Boots</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentBoots" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Boots.Names}" SelectionChanged="UpdateBoots" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Armor</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentArmor" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Armor.Names}" SelectionChanged="UpdateArmor" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Cloak</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="2" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentCloak" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Cloak.Names}" SelectionChanged="UpdateCloak" />
-                    </StackPanel>
-
-                    
-                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Item Slots</TextBlock>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Ballista</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <CheckBox Name="Ballista" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="AddBallista" Unchecked="RemoveBallista"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">First Aid Tent</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="2" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <CheckBox Name="FirstAidTent" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="AddFirstAidTent" Unchecked="RemoveFirstAidTent"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="1" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">Ammo Cart</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="1" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <CheckBox Name="AmmoCart" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="AddAmmoCart" Unchecked="RemoveAmmoCart"/>
-                    </StackPanel>
-
-
-                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentSlot1" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot1" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentSlot2" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot2" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentSlot3" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot3" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ComboBox Name="CurrentSlot4" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot4" />
-                    </StackPanel>
+                    <GroupBox Header="Item Slots" Grid.Row="0" Grid.Column="2">
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="Margin" Value="0,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <ComboBox Name="CurrentSlot1" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot1" />
+                            <ComboBox Name="CurrentSlot2" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot2" />
+                            <ComboBox Name="CurrentSlot3" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot3" />
+                            <ComboBox Name="CurrentSlot4" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot4" />
+                            <ComboBox Name="CurrentSlot5" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot5" />
+                        </StackPanel>
+                    </GroupBox>
                 </Grid>
             </GroupBox>
         </StackPanel>
