@@ -91,7 +91,10 @@ namespace Heroes3Editor.Models
 
         public ISet<string> Spells { get; } = new HashSet<string>();
 
-        public string[] Artifacts { get; } = new string[659];
+        public string[] Creatures { get; } = new string[7];
+        public int[] CreatureAmounts { get; } = new int[7];
+
+        public ISet<string> WarMachines { get; } = new HashSet<string>();
 
         public string Weapon { get; set; } = "";
         public string Shield { get; set; } = "";
@@ -107,12 +110,6 @@ namespace Heroes3Editor.Models
         public string Slot3 { get; set; } = "";
         public string Slot4 { get; set; } = "";
         public string Slot5 { get; set; } = "";
-        public string Ballista { get; set; } = "";
-        public string FirstAidTent { get; set; } = "";
-        public string AmmoCart { get; set; } = "";
-
-        public string[] Creatures { get; } = new string[7];
-        public int[] CreatureAmounts { get; } = new int[7];
 
         private const int ON = 0;
         private const int OFF = 255;
@@ -158,6 +155,12 @@ namespace Heroes3Editor.Models
                 }
             }
 
+            foreach (var warMachine in Constants.WarMachines.Names)
+            {
+                if (_game.Bytes[BytePosition + Constants.HeroOffsets[warMachine]] == Constants.WarMachines[warMachine])
+                    WarMachines.Add(warMachine);
+            }
+
             var hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Weapon"]];
             Weapon = Constants.Weapons[hexCode];
 
@@ -199,15 +202,6 @@ namespace Heroes3Editor.Models
 
             hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Slot5"]];
             Slot5 = Constants.Items[hexCode];
-
-            hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Ballista"]];
-            Ballista = Constants.Items[hexCode];
-
-            hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["First Aid Tent"]];
-            FirstAidTent = Constants.Items[hexCode];
-
-            hexCode = _game.Bytes[BytePosition + Constants.HeroOffsets["Ammo Cart"]];
-            AmmoCart = Constants.Items[hexCode];
 
             // Spell Book
         }
@@ -296,6 +290,28 @@ namespace Heroes3Editor.Models
         {
             var amountBytes = _game.Bytes.AsSpan().Slice(BytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
             BinaryPrimitives.WriteInt32LittleEndian(amountBytes, amount);
+        }
+
+        public void AddWarMachine(string warMachine)
+        {
+            if (!WarMachines.Add(warMachine)) return;
+
+            int position = BytePosition + Constants.HeroOffsets[warMachine];
+            _game.Bytes[position] = Constants.WarMachines[warMachine];
+            _game.Bytes[position + 1] = ON;
+            _game.Bytes[position + 2] = ON;
+            _game.Bytes[position + 3] = ON;
+        }
+
+        public void RemoveWarMachine(string warMachine)
+        {
+            if (!WarMachines.Remove(warMachine)) return;
+
+            int currentBytePos = BytePosition + Constants.HeroOffsets[warMachine];
+            _game.Bytes[currentBytePos] = OFF;
+            _game.Bytes[currentBytePos + 1] = OFF;
+            _game.Bytes[currentBytePos + 2] = OFF;
+            _game.Bytes[currentBytePos + 3] = OFF;
         }
 
         public void UpdateWeapon(string artifact)
@@ -589,66 +605,6 @@ namespace Heroes3Editor.Models
                 _game.Bytes[currentBytePos + 2] = OFF;
                 _game.Bytes[currentBytePos + 3] = OFF;
             }
-        }
-
-        public void AddBallista(string artifact)
-        {
-            Ballista = artifact;
-            int currentBytePos = BytePosition + Constants.HeroOffsets["Ballista"];
-            _game.Bytes[currentBytePos] = Constants.WarMachines[artifact];
-            _game.Bytes[currentBytePos + 1] = ON;
-            _game.Bytes[currentBytePos + 2] = ON;
-            _game.Bytes[currentBytePos + 3] = ON;
-        }
-
-        public void RemoveBallista(string artifact)
-        {
-            Ballista = artifact;
-            int currentBytePos = BytePosition + Constants.HeroOffsets["Ballista"];
-            _game.Bytes[currentBytePos] = OFF;
-            _game.Bytes[currentBytePos + 1] = OFF;
-            _game.Bytes[currentBytePos + 2] = OFF;
-            _game.Bytes[currentBytePos + 3] = OFF;
-        }
-
-        public void AddFirstAidTent(string artifact)
-        {
-            FirstAidTent = artifact;
-            int currentBytePos = BytePosition + Constants.HeroOffsets["First Aid Tent"];
-            _game.Bytes[currentBytePos] = Constants.WarMachines[artifact];
-            _game.Bytes[currentBytePos + 1] = ON;
-            _game.Bytes[currentBytePos + 2] = ON;
-            _game.Bytes[currentBytePos + 3] = ON;
-        }
-
-        public void RemoveFirstAidTent(string artifact)
-        {
-            FirstAidTent = artifact;
-            int currentBytePos = BytePosition + Constants.HeroOffsets["First Aid Tent"];
-            _game.Bytes[currentBytePos] = OFF;
-            _game.Bytes[currentBytePos + 1] = OFF;
-            _game.Bytes[currentBytePos + 2] = OFF;
-            _game.Bytes[currentBytePos + 3] = OFF;
-        }
-
-        public void AddAmmoCart(string artifact)
-        {
-            AmmoCart = artifact;
-            int currentBytePos = BytePosition + Constants.HeroOffsets["Ammo Cart"];
-            _game.Bytes[currentBytePos] = Constants.WarMachines[artifact];
-            _game.Bytes[currentBytePos + 1] = ON;
-            _game.Bytes[currentBytePos + 2] = ON;
-            _game.Bytes[currentBytePos + 3] = ON;
-        }
-
-        public void RemoveAmmoCart(string artifact)
-        {
-            AmmoCart = artifact;
-            int currentBytePos = BytePosition + Constants.HeroOffsets["Ammo Cart"];
-            _game.Bytes[currentBytePos] = OFF;
-            _game.Bytes[currentBytePos + 1] = OFF;
-            _game.Bytes[currentBytePos + 2] = OFF;
-            _game.Bytes[currentBytePos + 3] = OFF;
         }
     }
 }

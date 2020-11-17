@@ -57,8 +57,8 @@ namespace Heroes3Editor.Models
             {"Slot4", 309},
             {"Slot5", 357},
             {"Ballista", 317},
-            {"Ammo Cart", 325},
-            {"First Aid Tent", 333},
+            {"Ammo_Cart", 325},
+            {"First_Aid_Tent", 333},
             {"NumOfSkills", -126},
             {"Skills", 13}, // Secondary Skills
             {"SkillSlots", 41},
@@ -382,8 +382,8 @@ namespace Heroes3Editor.Models
         private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
         {
             {0x04, "Ballista" },
-            {0x05, "Ammo Cart" },
-            {0x06, "First Aid Tent" }
+            {0x05, "Ammo_Cart" },
+            {0x06, "First_Aid_Tent" }
         };
 
         private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);

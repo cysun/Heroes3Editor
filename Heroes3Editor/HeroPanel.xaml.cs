@@ -75,6 +75,12 @@ namespace Heroes3Editor
                     }
                 }
 
+                foreach (var warMachine in _hero.WarMachines)
+                {
+                    var chkBox = FindName(warMachine) as CheckBox;
+                    chkBox.IsChecked = true;
+                }
+
                 var artifact = _hero.Weapon;
                 var artifactCboBox = FindName("CurrentWeapon") as ComboBox;
                 artifactCboBox.SelectedItem = artifact;
@@ -130,18 +136,6 @@ namespace Heroes3Editor
                 artifact = _hero.Slot5;
                 artifactCboBox = FindName("CurrentSlot5") as ComboBox;
                 artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Ballista;
-                var artifactChkBox = FindName("Ballista") as CheckBox;
-                artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
-
-                artifact = _hero.FirstAidTent;
-                artifactChkBox = FindName("FirstAidTent") as CheckBox;
-                artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
-
-                artifact = _hero.AmmoCart;
-                artifactChkBox = FindName("AmmoCart") as CheckBox;
-                artifactChkBox.IsChecked = (artifact.Length > 7) ? true : false;
             }
 
             // Checkboxes for these
@@ -237,6 +231,18 @@ namespace Heroes3Editor
             if (!isNumber || amount < 0 || amount > 9999) return;
 
             _hero.UpdateCreatureAmount(i, amount);
+        }
+
+        private void AddWarMachine(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.AddWarMachine(chkBox.Name);
+        }
+
+        private void RemoveWarMachine(object sender, RoutedEventArgs e)
+        {
+            var chkBox = e.Source as CheckBox;
+            _hero.RemoveWarMachine(chkBox.Name);
         }
 
         private void UpdateWeapon(object sender, RoutedEventArgs e)
@@ -349,42 +355,6 @@ namespace Heroes3Editor
             var boots = cboBox.SelectedItem as string;
 
             _hero.UpdateBoots(boots);
-        }
-
-        private void AddBallista(object sender, RoutedEventArgs e)
-        {
-            var chkBox = e.Source as CheckBox;
-            _hero.AddBallista("Ballista");
-        }
-
-        private void RemoveBallista(object sender, RoutedEventArgs e)
-        {
-            var chkBox = e.Source as CheckBox;
-            _hero.RemoveBallista("Ballista");
-        }
-
-        private void AddFirstAidTent(object sender, RoutedEventArgs e)
-        {
-            var chkBox = e.Source as CheckBox;
-            _hero.AddFirstAidTent("First Aid Tent");
-        }
-
-        private void RemoveFirstAidTent(object sender, RoutedEventArgs e)
-        {
-            var chkBox = e.Source as CheckBox;
-            _hero.RemoveFirstAidTent("First Aid Tent");
-        }
-
-        private void AddAmmoCart(object sender, RoutedEventArgs e)
-        {
-            var chkBox = e.Source as CheckBox;
-            _hero.AddAmmoCart("Ammo Cart");
-        }
-
-        private void RemoveAmmoCart(object sender, RoutedEventArgs e)
-        {
-            var chkBox = e.Source as CheckBox;
-            _hero.RemoveAmmoCart("Ammo Cart");
         }
     }
 }

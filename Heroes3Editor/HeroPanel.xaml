@@ -391,13 +391,13 @@
             </GroupBox>
             <GroupBox Header="War Machines">
                 <WrapPanel>
-                    <CheckBox Name="Ballista" Checked="AddBallista" Unchecked="RemoveBallista">
+                    <CheckBox Name="Ballista" Checked="AddWarMachine" Unchecked="RemoveWarMachine">
                         <Label>Ballista</Label>
                     </CheckBox>
-                    <CheckBox Name="AmmoCart" Checked="AddAmmoCart" Unchecked="RemoveAmmoCart">
+                    <CheckBox Name="Ammo_Cart" Margin="25,0" Checked="AddWarMachine" Unchecked="RemoveWarMachine">
                         <Label>Ammo Cart</Label>
                     </CheckBox>
-                    <CheckBox Name="FirstAidTent" Checked="AddFirstAidTent" Unchecked="RemoveFirstAidTent">
+                    <CheckBox Name="First_Aid_Tent" Checked="AddWarMachine" Unchecked="RemoveWarMachine">
                         <Label>First Aid Tent</Label>
                     </CheckBox>
                 </WrapPanel>
