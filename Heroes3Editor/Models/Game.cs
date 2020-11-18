@@ -168,7 +168,8 @@ namespace Heroes3Editor.Models
             foreach (var gear in gears)
             {
                 var code = _game.Bytes[BytePosition + Constants.HeroOffsets[gear]];
-                EquippedArtifacts[gear] = Constants.Artifacts[code];
+                if (code != 0xFF)
+                    EquippedArtifacts[gear] = Constants.Artifacts[code];
             }
         }
 

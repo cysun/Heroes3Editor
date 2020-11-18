@@ -6,9 +6,26 @@ got back into playing HoMM3 after discovering the wonderful
 these days, I can no longer bear the tedious part of the game, thus this savegame editor to make it
 a little easier.
 
-## About CGM Format
+## Usage and Features
 
-HoMM3 Savegame (.CGM) is supposed to be a GZip file, but all the tools/libraries either fail to unzip it
+Open a savegame file (.CGM for Campaign game save or .GM1 for Single Scenario game save), search for a hero by
+name. You may search the same hero multiple times to locate multiple instances of the hero in the same savegame
+file. Once a hero is found, you can edit the following:
+* Primary skills (i.e. Attack, Defense, Spell Power, and Knowledge)
+* Secondary skills and skill levels
+* Spells
+* Creature stack type and amount
+* War machines (i.e. Ballista, Ammo Cart, and First Aid Tent)
+* Equipped artifacts
+
+## Known Issues
+
+Combination Artifacts (e.g. Cloak of the Undead King) are not supported. The program will crash if you try to
+edit a hero equipped with a combo artifact.
+
+## About Savegame File Format
+
+HoMM3 Savegame is supposed to be a GZip file, but all the tools/libraries either fail to unzip it
 or complain about CRC error:
 * [7-Zip](https://www.7-zip.org/): can extract but complains about CRC error
 * [GZipStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.compression.gzipstream?view=netcore-3.1):
@@ -29,3 +46,7 @@ project -- it's the part that deals with GZip but with the line raising CRC exce
 * Various game information on [HoMM3 Wiki](https://heroes.thelazy.net//index.php/Main_Page).
 * [Visual Studio Image Library](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the icons.
 * [Exhumed](http://www.iconarchive.com/artist/3xhumed.html) for the application icon.
+
+## Screenshot
+
+![Screenshot](https://mynotes.cysun.org/files/view/1000202)
