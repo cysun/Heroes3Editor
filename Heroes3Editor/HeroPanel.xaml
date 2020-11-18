@@ -419,33 +419,33 @@
                     </Grid.Resources>
                     <StackPanel Grid.Row="0" Grid.Column="0">
                         <GroupBox Header="Helm">
-                            <ComboBox Name="CurrentHelm" ItemsSource="{Binding Path=Helms.Names}" SelectionChanged="UpdateHelm" />
+                            <ComboBox Name="EA_Helm" ItemsSource="{Binding Path=Helms.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Neck">
-                            <ComboBox Name="CurrentNeck" ItemsSource="{Binding Path=Neck.Names}" SelectionChanged="UpdateNeck" />
+                            <ComboBox Name="EA_Neck" ItemsSource="{Binding Path=Neck.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Armor">
-                            <ComboBox Name="CurrentArmor" ItemsSource="{Binding Path=Armor.Names}" SelectionChanged="UpdateArmor" />
+                            <ComboBox Name="EA_Armor" ItemsSource="{Binding Path=Armor.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Cloak">
-                            <ComboBox Name="CurrentCloak" ItemsSource="{Binding Path=Cloak.Names}" SelectionChanged="UpdateCloak" />
+                            <ComboBox Name="EA_Cloak" ItemsSource="{Binding Path=Cloak.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Boots">
-                            <ComboBox Name="CurrentBoots" ItemsSource="{Binding Path=Boots.Names}" SelectionChanged="UpdateBoots" />
+                            <ComboBox Name="EA_Boots" ItemsSource="{Binding Path=Boots.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Grid.Column="1">
                         <GroupBox Header="Weapon">
-                            <ComboBox Name="CurrentWeapon" ItemsSource="{Binding Path=Weapons.Names}" SelectionChanged="UpdateWeapon" />
+                            <ComboBox Name="EA_Weapon" ItemsSource="{Binding Path=Weapons.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Shield">
-                            <ComboBox Name="CurrentShield" ItemsSource="{Binding Path=Shields.Names}" SelectionChanged="UpdateShield" />
+                            <ComboBox Name="EA_Shield" ItemsSource="{Binding Path=Shields.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Left Ring">
-                            <ComboBox Name="CurrentLeftRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateLeftRing" />
+                            <ComboBox Name="EA_LeftRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Right Ring">
-                            <ComboBox Name="CurrentRightRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateRightRing" />
+                            <ComboBox Name="EA_RightRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                     </StackPanel>
                     <GroupBox Header="Item Slots" Grid.Row="0" Grid.Column="2">
@@ -455,11 +455,11 @@
                                     <Setter Property="Margin" Value="0,5"/>
                                 </Style>
                             </StackPanel.Resources>
-                            <ComboBox Name="CurrentSlot1" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot1" />
-                            <ComboBox Name="CurrentSlot2" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot2" />
-                            <ComboBox Name="CurrentSlot3" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot3" />
-                            <ComboBox Name="CurrentSlot4" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot4" />
-                            <ComboBox Name="CurrentSlot5" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateSlot5" />
+                            <ComboBox Name="EA_Item1" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item2" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item3" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item4" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item5" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </StackPanel>
                     </GroupBox>
                 </Grid>

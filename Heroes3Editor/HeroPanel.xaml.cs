@@ -81,65 +81,15 @@ namespace Heroes3Editor
                     chkBox.IsChecked = true;
                 }
 
-                var artifact = _hero.Weapon;
-                var artifactCboBox = FindName("CurrentWeapon") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Helm;
-                artifactCboBox = FindName("CurrentHelm") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Shield;
-                artifactCboBox = FindName("CurrentShield") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.LeftRing;
-                artifactCboBox = FindName("CurrentLeftRing") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Neck;
-                artifactCboBox = FindName("CurrentNeck") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.RightRing;
-                artifactCboBox = FindName("CurrentRightRing") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Boots;
-                artifactCboBox = FindName("CurrentBoots") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Armor;
-                artifactCboBox = FindName("CurrentArmor") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Cloak;
-                artifactCboBox = FindName("CurrentCloak") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Slot1;
-                artifactCboBox = FindName("CurrentSlot1") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Slot2;
-                artifactCboBox = FindName("CurrentSlot2") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Slot3;
-                artifactCboBox = FindName("CurrentSlot3") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Slot4;
-                artifactCboBox = FindName("CurrentSlot4") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
-
-                artifact = _hero.Slot5;
-                artifactCboBox = FindName("CurrentSlot5") as ComboBox;
-                artifactCboBox.SelectedItem = artifact;
+                var gears = new List<string>(_hero.EquippedArtifacts.Keys);
+                foreach (var gear in gears)
+                {
+                    // Attach an EA_ prefix to gear because there's already
+                    // a CheckBox for the spell Shield
+                    var cboBox = FindName("EA_" + gear) as ComboBox;
+                    cboBox.SelectedItem = _hero.EquippedArtifacts[gear];
+                }
             }
-
-            // Checkboxes for these
-            // Spell Book - In the Spell Section 
         }
 
         public HeroPanel()
@@ -245,116 +195,12 @@ namespace Heroes3Editor
             _hero.RemoveWarMachine(chkBox.Name);
         }
 
-        private void UpdateWeapon(object sender, RoutedEventArgs e)
+        private void UpdateEquippedArtifact(object sender, RoutedEventArgs e)
         {
             var cboBox = e.Source as ComboBox;
-            var weapon = cboBox.SelectedItem as string;
-
-            _hero.UpdateWeapon(weapon);
-        }
-
-        private void UpdateRightRing(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var ring = cboBox.SelectedItem as string;
-
-            _hero.UpdateRightRing(ring);
-        }
-
-        private void UpdateLeftRing(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var ring = cboBox.SelectedItem as string;
-
-            _hero.UpdateLeftRing(ring);
-        }
-
-        private void UpdateHelm(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var helm = cboBox.SelectedItem as string;
-
-            _hero.UpdateHelm(helm);
-        }
-
-        private void UpdateSlot1(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var item = cboBox.SelectedItem as string;
-
-            _hero.UpdateSlot1(item);
-        }
-
-        private void UpdateSlot2(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var item = cboBox.SelectedItem as string;
-
-            _hero.UpdateSlot2(item);
-        }
-
-        private void UpdateSlot3(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var item = cboBox.SelectedItem as string;
-
-            _hero.UpdateSlot3(item);
-        }
-
-        private void UpdateSlot4(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var item = cboBox.SelectedItem as string;
-
-            _hero.UpdateSlot4(item);
-        }
-
-        private void UpdateSlot5(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var item = cboBox.SelectedItem as string;
-
-            _hero.UpdateSlot5(item);
-        }
-
-        private void UpdateNeck(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var neck = cboBox.SelectedItem as string;
-
-            _hero.UpdateNeck(neck);
-        }
-
-        private void UpdateCloak(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var cloak = cboBox.SelectedItem as string;
-
-            _hero.UpdateCloak(cloak);
-        }
-
-        private void UpdateArmor(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var armor = cboBox.SelectedItem as string;
-
-            _hero.UpdateArmor(armor);
-        }
-
-        private void UpdateShield(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var shield = cboBox.SelectedItem as string;
-
-            _hero.UpdateShield(shield);
-        }
-
-        private void UpdateBoots(object sender, RoutedEventArgs e)
-        {
-            var cboBox = e.Source as ComboBox;
-            var boots = cboBox.SelectedItem as string;
-
-            _hero.UpdateBoots(boots);
+            var gear = cboBox.Name.Substring("EA_".Length);
+            var artifact = cboBox.SelectedItem as string;
+            _hero.UpdateEquippedArtifact(gear, artifact);
         }
     }
 }
