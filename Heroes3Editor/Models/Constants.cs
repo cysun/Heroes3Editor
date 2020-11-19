@@ -18,6 +18,7 @@ namespace Heroes3Editor.Models
         public static Neck Neck { get; } = new Neck();
         public static Items Items { get; } = new Items();
         public static WarMachines WarMachines { get; } = new WarMachines();
+        public static Artifacts Artifacts { get; } = new Artifacts();
 
         public static string[] Heroes { get; } =
         {
@@ -51,14 +52,14 @@ namespace Heroes3Editor.Models
             {"Boots", 277},
             {"LeftRing", 261},
             {"RightRing", 269},
-            {"Slot1", 285},
-            {"Slot2", 293},
-            {"Slot3", 301},
-            {"Slot4", 309},
-            {"Slot5", 357},
+            {"Item1", 285},
+            {"Item2", 293},
+            {"Item3", 301},
+            {"Item4", 309},
+            {"Item5", 357},
             {"Ballista", 317},
-            {"Ammo Cart", 325},
-            {"First Aid Tent", 333},
+            {"Ammo_Cart", 325},
+            {"First_Aid_Tent", 333},
             {"NumOfSkills", -126},
             {"Skills", 13}, // Secondary Skills
             {"SkillSlots", 41},
@@ -382,8 +383,8 @@ namespace Heroes3Editor.Models
         private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
         {
             {0x04, "Ballista" },
-            {0x05, "Ammo Cart" },
-            {0x06, "First Aid Tent" }
+            {0x05, "Ammo_Cart" },
+            {0x06, "First_Aid_Tent" }
         };
 
         private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
@@ -409,8 +410,8 @@ namespace Heroes3Editor.Models
             {0x07, "Centaur's Axe" },
             {0x08, "Blackshard of the Dead Knight" },
             {0x09, "Greater Knoll's Flail" },
-            {0x0A, "Ogre's club of Havoc" },
-            {0x0B, "Sword of hellfire" },
+            {0x0A, "Ogre's Club of Havoc" },
+            {0x0B, "Sword of Hellfire" },
             {0X0C, "Titan's Gladius" },
             {0x0D, "Shield of the Dwarven Lords" },
             {0x0E, "Shield of the Yawning Dead" },
@@ -444,7 +445,7 @@ namespace Heroes3Editor.Models
             {0x2A, "Dragon Wing Tabard" },
             {0x2B, "Necklace of Dragonteeth" },
             {0x2C, "Crown of Dragontooth" },
-            {0x2D, "Still eye of the Dragon" },
+            {0x2D, "Still Eye of the Dragon" },
             {0x2E, "Clover of Fortune" },
             {0x2F, "Cards of Prophecy" },
             {0x30, "Ladybird of Luck" },
