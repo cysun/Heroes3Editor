@@ -146,7 +146,7 @@ namespace Heroes3Editor.Models
             for (int i = 0; i < 7; ++i)
             {
                 var code = _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4];
-                if (code != 0xFF)
+                if (code != OFF)
                 {
                     Creatures[i] = Constants.Creatures[code];
                     var amountBytes = _game.Bytes.AsSpan().Slice(BytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
@@ -168,7 +168,7 @@ namespace Heroes3Editor.Models
             foreach (var gear in gears)
             {
                 var code = _game.Bytes[BytePosition + Constants.HeroOffsets[gear]];
-                if (code != 0xFF)
+                if (code != OFF)
                     EquippedArtifacts[gear] = Constants.Artifacts[code];
             }
         }
