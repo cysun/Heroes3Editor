@@ -95,6 +95,7 @@ namespace Heroes3Editor.Models
         public int[] CreatureAmounts { get; } = new int[7];
 
         public ISet<string> WarMachines { get; } = new HashSet<string>();
+        public string[] ArtifactInfo { get; } = new string[1];
 
         public IDictionary<string, string> EquippedArtifacts = new Dictionary<string, string>()
         {
@@ -300,6 +301,17 @@ namespace Heroes3Editor.Models
                 _game.Bytes[currentBytePos + 2] = OFF;
                 _game.Bytes[currentBytePos + 3] = OFF;
             }
+        }
+
+        //  NAME|ATTACK|DEFENSE|POWER|KNOWLEDGE|MORALE|LUCK|OTHER
+        //   0  |   1  |   2   |  3  |    4    |   5  |  6 |  7
+        public string[] UpdateArtifactInfo(string artifact)
+        {
+            if (null != artifact && !"None".Equals(artifact))
+            {
+                return Constants.ArtifactInfo[Constants.Artifacts[artifact]].Split("|");
+            }
+            return null;
         }
     }
 }

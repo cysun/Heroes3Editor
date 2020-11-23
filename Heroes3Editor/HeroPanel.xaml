@@ -518,33 +518,33 @@
                     </Grid.Resources>
                     <StackPanel Grid.Row="0" Grid.Column="0">
                         <GroupBox Header="Helm">
-                            <ComboBox Name="EA_Helm" ItemsSource="{Binding Path=Helms.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Helm" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo" ItemsSource="{Binding Path=Helms.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Neck">
-                            <ComboBox Name="EA_Neck" ItemsSource="{Binding Path=Neck.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Neck" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Neck.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Armor">
-                            <ComboBox Name="EA_Armor" ItemsSource="{Binding Path=Armor.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Armor" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Armor.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Cloak">
-                            <ComboBox Name="EA_Cloak" ItemsSource="{Binding Path=Cloak.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Cloak" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Cloak.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Boots">
-                            <ComboBox Name="EA_Boots" ItemsSource="{Binding Path=Boots.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Boots" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Boots.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Grid.Column="1">
                         <GroupBox Header="Weapon">
-                            <ComboBox Name="EA_Weapon" ItemsSource="{Binding Path=Weapons.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Weapon" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Weapons.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Shield">
-                            <ComboBox Name="EA_Shield" ItemsSource="{Binding Path=Shields.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Shield" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Shields.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Left Ring">
-                            <ComboBox Name="EA_LeftRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_LeftRing" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                         <GroupBox Header="Right Ring">
-                            <ComboBox Name="EA_RightRing" ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_RightRing" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo"  ItemsSource="{Binding Path=Rings.Names}" SelectionChanged="UpdateEquippedArtifact" />
                         </GroupBox>
                     </StackPanel>
                     <GroupBox Header="Item Slots" Grid.Row="0" Grid.Column="2">
@@ -554,11 +554,53 @@
                                     <Setter Property="Margin" Value="0,5"/>
                                 </Style>
                             </StackPanel.Resources>
-                            <ComboBox Name="EA_Item1" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
-                            <ComboBox Name="EA_Item2" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
-                            <ComboBox Name="EA_Item3" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
-                            <ComboBox Name="EA_Item4" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
-                            <ComboBox Name="EA_Item5" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item1" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item2" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item3" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item4" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <ComboBox Name="EA_Item5" MouseEnter="UpdateArtifactInfo" MouseLeave="ClearArtifactInfo" ItemsSource="{Binding Path=Items.Names}" SelectionChanged="UpdateEquippedArtifact" />
+                            <GroupBox Header="Artifact Info" Name="ArtifactInfo" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="1">
+                                        <Label>Att:</Label>
+                                        <TextBlock TextWrapping="Wrap" Name="Attack" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="1">
+                                        <Label>Def:</Label>
+                                        <TextBlock TextWrapping="Wrap" Name="Defense" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="1">
+                                        <Label>Pow:</Label>
+                                        <TextBlock TextWrapping="Wrap" Name="Power" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="1">
+                                        <Label>Know:</Label>
+                                        <TextBlock TextWrapping="Wrap" Name="Knowledge" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Margin="1">
+                                        <Label>Morale:</Label>
+                                        <TextBlock TextWrapping="Wrap" Name="Morale" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="1">
+                                        <Label>Luck:</Label>
+                                        <TextBlock TextWrapping="Wrap" Name="Luck" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="2">
+                                        <Label>Effects:</Label>
+                                        <TextBlock TextWrapping="WrapWithOverflow" Name="Effects" VerticalAlignment="Center" Width="135" Height="110" Margin="0,5,2,2"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
                         </StackPanel>
                     </GroupBox>
                 </Grid>

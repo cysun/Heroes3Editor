@@ -202,5 +202,53 @@ namespace Heroes3Editor
             var artifact = cboBox.SelectedItem as string;
             _hero.UpdateEquippedArtifact(gear, artifact);
         }
+
+        private void UpdateArtifactInfo(object sender, RoutedEventArgs e)
+        {
+            var cboBox = e.Source as ComboBox;
+            var artifact = cboBox.SelectedItem as string;
+
+            if (null != _hero.UpdateArtifactInfo(artifact))
+            {
+                var txtBlock = FindName("Attack") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[1];
+
+                txtBlock = FindName("Defense") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[2];
+
+                txtBlock = FindName("Power") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[3];
+
+                txtBlock = FindName("Knowledge") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[4];
+
+                txtBlock = FindName("Morale") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[5];
+
+                txtBlock = FindName("Luck") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[6];
+
+                txtBlock = FindName("Effects") as TextBlock;
+                txtBlock.Text = _hero.UpdateArtifactInfo(artifact)[7];
+            }
+        }
+
+        private void ClearArtifactInfo(object sender, RoutedEventArgs e)
+        {
+            var txtBlock = FindName("Attack") as TextBlock;
+            txtBlock.Text = "";
+            txtBlock = FindName("Defense") as TextBlock;
+            txtBlock.Text = "";
+            txtBlock = FindName("Power") as TextBlock;
+            txtBlock.Text = "";
+            txtBlock = FindName("Knowledge") as TextBlock;
+            txtBlock.Text = "";
+            txtBlock = FindName("Morale") as TextBlock;
+            txtBlock.Text = "";
+            txtBlock = FindName("Luck") as TextBlock;
+            txtBlock.Text = "";
+            txtBlock = FindName("Effects") as TextBlock;
+            txtBlock.Text = "";
+        }
     }
 }
