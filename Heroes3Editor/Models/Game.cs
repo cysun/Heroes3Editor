@@ -95,6 +95,7 @@ namespace Heroes3Editor.Models
         public int[] CreatureAmounts { get; } = new int[7];
 
         public ISet<string> WarMachines { get; } = new HashSet<string>();
+        public string[] ArtifactInfo { get; } = new string[1];
 
         public IDictionary<string, string> EquippedArtifacts = new Dictionary<string, string>()
         {
@@ -146,7 +147,7 @@ namespace Heroes3Editor.Models
             for (int i = 0; i < 7; ++i)
             {
                 var code = _game.Bytes[BytePosition + Constants.HeroOffsets["Creatures"] + i * 4];
-                if (code != 0xFF)
+                if (code != OFF)
                 {
                     Creatures[i] = Constants.Creatures[code];
                     var amountBytes = _game.Bytes.AsSpan().Slice(BytePosition + Constants.HeroOffsets["CreatureAmounts"] + i * 4, 4);
@@ -168,7 +169,7 @@ namespace Heroes3Editor.Models
             foreach (var gear in gears)
             {
                 var code = _game.Bytes[BytePosition + Constants.HeroOffsets[gear]];
-                if (code != 0xFF)
+                if (code != OFF)
                     EquippedArtifacts[gear] = Constants.Artifacts[code];
             }
         }
@@ -300,6 +301,17 @@ namespace Heroes3Editor.Models
                 _game.Bytes[currentBytePos + 2] = OFF;
                 _game.Bytes[currentBytePos + 3] = OFF;
             }
+        }
+
+        //  NAME|ATTACK|DEFENSE|POWER|KNOWLEDGE|MORALE|LUCK|OTHER
+        //   0  |   1  |   2   |  3  |    4    |   5  |  6 |  7
+        public string[] UpdateArtifactInfo(string artifact)
+        {
+            if (null != artifact && !"None".Equals(artifact))
+            {
+                return Constants.ArtifactInfo[Constants.Artifacts[artifact]].Split("|");
+            }
+            return null;
         }
     }
 }
