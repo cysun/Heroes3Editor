@@ -27,6 +27,17 @@ namespace Heroes3Editor.Models
             using var memoryStream = new MemoryStream();
             gzipStream.CopyTo(memoryStream);
             Bytes = memoryStream.ToArray();
+            var gameVersionMajor = Bytes[8];
+            var gameVersionMinor = Bytes[12];
+            if (gameVersionMajor == 44 && gameVersionMinor == 5) 
+            {
+                //hota
+                Constants.HeroOffsets["SkillSlots"] = 923;
+            }
+            if (gameVersionMajor == 42 && gameVersionMinor == 2)
+            {
+                //heroes 3 complete
+            }
         }
 
         public void Save(string file)
