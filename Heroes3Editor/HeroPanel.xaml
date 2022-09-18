@@ -490,13 +490,19 @@
             </GroupBox>
             <GroupBox Header="War Machines">
                 <WrapPanel>
-                    <CheckBox Name="Ballista" Checked="AddWarMachine" Unchecked="RemoveWarMachine">
+                    <CheckBox Name="Ballista" Checked="AddWarMachine" Unchecked="RemoveWarMachine" Tag="Ballista">
                         <Label>Ballista</Label>
                     </CheckBox>
-                    <CheckBox Name="Ammo_Cart" Margin="25,0" Checked="AddWarMachine" Unchecked="RemoveWarMachine">
+                    <RadioButton GroupName="Artillery" Name="BallistaRadio" Checked="AddWarMachine" Unchecked="RemoveWarMachine" Tag="Ballista" Visibility="Hidden">
+                        <Label>Ballista</Label>
+                    </RadioButton>
+                    <RadioButton GroupName="Artillery" Name="Canon" Checked="AddWarMachine" Unchecked="RemoveWarMachine" Tag="Canon" Visibility="Hidden">
+                        <Label>Canon</Label>
+                    </RadioButton>
+                    <CheckBox Name="Ammo_Cart" Margin="25,0" Checked="AddWarMachine" Unchecked="RemoveWarMachine" Tag="Ammo_Cart">
                         <Label>Ammo Cart</Label>
                     </CheckBox>
-                    <CheckBox Name="First_Aid_Tent" Checked="AddWarMachine" Unchecked="RemoveWarMachine">
+                    <CheckBox Name="First_Aid_Tent" Checked="AddWarMachine" Unchecked="RemoveWarMachine" Tag="First_Aid_Tent">
                         <Label>First Aid Tent</Label>
                     </CheckBox>
                 </WrapPanel>

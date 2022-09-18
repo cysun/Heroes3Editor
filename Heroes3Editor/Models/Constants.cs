@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Heroes3Editor.Models
 {
@@ -39,7 +41,9 @@ namespace Heroes3Editor.Models
             "Oris", "Saurug", "Terek", "Vey", "Zubin", "Alkin", "Broghild", "Bron", "Drakon", "Gerwulf", "Korbac",
             "Tazar", "Wystan", "Andra", "Merist", "Mirlanda", "Rosic", "Styg", "Tiva", "Verdish", "Voy", "Adrienne",
             "Erdamon", "Fiur", "Ignissa", "Kalt", "Lacus", "Monere", "Pasis", "Thunar", "Aenain", "Brissa", "Ciele",
-            "Gelare", "Grindan", "Inteus", "Labetha", "Luna", "Gen. Kendal"
+            "Gelare", "Grindan", "Inteus", "Labetha", "Luna", "Gen. Kendal", "Anabel","Cassiopeia","Corkes","Derek",
+            "Elmore","Illor","Leena","Miriam","Andal","Astra","Dargem","Eovacius","Manfred","Zilare",
+            "Jeremy","Bidley","Spint", "Casmetra","Tark"
         };
 
         public static Dictionary<string, int> HeroOffsets = new Dictionary<string, int>()
@@ -60,6 +64,7 @@ namespace Heroes3Editor.Models
             {"Item4", 309},
             {"Item5", 357},
             {"Ballista", 317},
+            {"Canon", 317},
             {"Ammo_Cart", 325},
             {"First_Aid_Tent", 333},
             {"NumOfSkills", -126},
@@ -71,6 +76,50 @@ namespace Heroes3Editor.Models
             {"CreatureAmounts", -28},
             {"Inventory", 365 }
         };
+
+        public static void LoadHOTAItems()
+        {
+            WarMachines.LoadHotaReferenceCodes();
+            Weapons.LoadHotaReferenceCodes();
+            Shields.LoadHotaReferenceCodes();
+            Armor.LoadHotaReferenceCodes();
+            Cloak.LoadHotaReferenceCodes();
+            Helms.LoadHotaReferenceCodes();
+            Rings.LoadHotaReferenceCodes();
+            Boots.LoadHotaReferenceCodes();
+            Neck.LoadHotaReferenceCodes();
+            Items.LoadHotaReferenceCodes();
+            Creatures.LoadHotaReferenceCodes();
+        }
+
+        public static void RemoveHOTAReferenceCodes()
+        {
+            WarMachines.RemoveHotaReferenceCodes();
+            Weapons.RemoveHotaReferenceCodes();
+            Shields.RemoveHotaReferenceCodes();
+            Armor.RemoveHotaReferenceCodes();
+            Cloak.RemoveHotaReferenceCodes();
+            Helms.RemoveHotaReferenceCodes();
+            Rings.RemoveHotaReferenceCodes();
+            Boots.RemoveHotaReferenceCodes();
+            Neck.RemoveHotaReferenceCodes();
+            Items.RemoveHotaReferenceCodes();
+            Creatures.RemoveHotaReferenceCodes();
+        }
+
+        public static void LoadAllArtifacts()
+        {
+            Artifacts.AddArtifacts(WarMachines.GetArtifacts);
+            Artifacts.AddArtifacts(Weapons.GetArtifacts);
+            Artifacts.AddArtifacts(Shields.GetArtifacts);
+            Artifacts.AddArtifacts(Armor.GetArtifacts);
+            Artifacts.AddArtifacts(Cloak.GetArtifacts);
+            Artifacts.AddArtifacts(Helms.GetArtifacts);
+            Artifacts.AddArtifacts(Rings.GetArtifacts);
+            Artifacts.AddArtifacts(Boots.GetArtifacts);
+            Artifacts.AddArtifacts(Neck.GetArtifacts);
+            Artifacts.AddArtifacts(Items.GetArtifacts);
+        }
     }
 
     public class Skills
@@ -116,449 +165,309 @@ namespace Heroes3Editor.Models
         public int this[string key] => _codesByName[key];
     }
 
-    public class Weapons
+    public class Weapons : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Weapons()
         {
-            {0xFF, "None" },
-            {0x07, "Centaur's Axe" },
-            {0x08, "Blackshard of the Dead Knight" },
-            {0x09, "Greater Knoll's Flail" },
-            {0x0A, "Ogre's Club of Havoc" },
-            {0x0B, "Sword of Hellfire" },
-            {0X0C, "Titan's Gladius" },
-            {0x11, "Sword of Judgement" },
-            {0x26, "Red Dragon Flame Tongue" },
-            {0x80, "Armageddon's Blade" },
-            {0x81, "Angelic Alliance" },
-            {0x87, "Titans Thunder" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>()
+            {
+                {0xFF, "None" },
+                {0x07, "Centaur's Axe" },
+                {0x08, "Blackshard of the Dead Knight" },
+                {0x09, "Greater Knoll's Flail" },
+                {0x0A, "Ogre's Club of Havoc" },
+                {0x0B, "Sword of Hellfire" },
+                {0X0C, "Titan's Gladius" },
+                {0x11, "Sword of Judgement" },
+                {0x26, "Red Dragon Flame Tongue" },
+                {0x80, "Armageddon's Blade" },
+                {0x81, "Angelic Alliance" },
+                {0x87, "Titans Thunder" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>()
+            {
+                {0x8F, "Ironfist of the Ogre" },
+            };
+        }
     }
 
-    public class Shields
+    public class Shields : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Shields()
         {
-            {0xFF, "None" },
-            {0x0D, "Shield of the Dwarven Lords" },
-            {0x0E, "Shield of the Yawning Dead" },
-            {0x0F, "Buckler of the Gnoll King" },
-            {0x10, "Targ of the Rampaging Ogre" },
-            {0x11, "Shield of the Damned" },
-            {0x12, "Sentinel's Shield" },
-            {0x22, "Lion's Shield of Courage" },
-            {0x27, "Dragon Scale Shield" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0xFF, "None" },
+                {0x0D, "Shield of the Dwarven Lords" },
+                {0x0E, "Shield of the Yawning Dead" },
+                {0x0F, "Buckler of the Gnoll King" },
+                {0x10, "Targ of the Rampaging Ogre" },
+                {0x11, "Shield of the Damned" },
+                {0x12, "Sentinel's Shield" },
+                {0x22, "Lion's Shield of Courage" },
+                {0x27, "Dragon Scale Shield" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>()
+            {
+                {148, "Shield of Naval Glory"},
+            };
+        }
     }
 
-    public class Helms
+    public class Helms : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Helms()
         {
-            {0xFF, "None" },
-            {0x13, "Helm of the Alabaster Unicorn" },
-            {0x14, "Skull Helmet" },
-            {0x15, "Helm of Chaos" },
-            {0x16, "Crown of the Supreme Magi" },
-            {0x17, "Hellstorm Helmet" },
-            {0x18, "Thunder Helmet" },
-            {0x24, "Helm of Heavenly Enlightenment" },
-            {0x2C, "Crown of Dragontooth" },
-            {0x7B, "Sea Captain's Hat" },
-            {0x7C, "Spellbinder's Hat" },
-            {0x88, "Admiral's Hat" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0xFF, "None" },
+                {0x13, "Helm of the Alabaster Unicorn" },
+                {0x14, "Skull Helmet" },
+                {0x15, "Helm of Chaos" },
+                {0x16, "Crown of the Supreme Magi" },
+                {0x17, "Hellstorm Helmet" },
+                {0x18, "Thunder Helmet" },
+                {0x24, "Helm of Heavenly Enlightenment" },
+                {0x2C, "Crown of Dragontooth" },
+                {0x7B, "Sea Captain's Hat" },
+                {0x7C, "Spellbinder's Hat" },
+                {0x88, "Admiral's Hat" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {150, "Crown of the Five Seas"},
+                {155, "Hideous Mask"},
+            };
+        }
     }
 
-    public class Armor
+    public class Armor : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Armor()
         {
-            {0xFF, "None" },
-            {0x19, "Breastplate of Petrified Wood" },
-            {0x1A, "Rib Cage" },
-            {0x1B, "Scales of the Greater Basilisk" },
-            {0x1C, "Tunic of the Cyclops King" },
-            {0x1D, "Breastplate of Brimstone" },
-            {0x1E, "Titan's Cuirass" },
-            {0x1F, "Armor of Wonder" },
-            {0x28, "Dragon Scale Armor" },
-            {0x3A, "Surcoat of Counterpoise" },
-            {0x84, "Armor of the Dammed" },
-            {0x86, "Power of the Dragon Father" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0xFF, "None" },
+                {0x19, "Breastplate of Petrified Wood" },
+                {0x1A, "Rib Cage" },
+                {0x1B, "Scales of the Greater Basilisk" },
+                {0x1C, "Tunic of the Cyclops King" },
+                {0x1D, "Breastplate of Brimstone" },
+                {0x1E, "Titan's Cuirass" },
+                {0x1F, "Armor of Wonder" },
+                {0x28, "Dragon Scale Armor" },
+                {0x3A, "Surcoat of Counterpoise" },
+                {0x84, "Armor of the Dammed" },
+                {0x86, "Power of the Dragon Father" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {149, "Royal Armor of Nix"},
+                {164, "Plate of Dying Light"}
+            };
+        }
     }
 
-    public class Cloak
+    public class Cloak : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Cloak()
         {
-            {0xFF, "None" },
-            {0x2A, "Dragon Wing Tabard" },
-            {0x37, "Vampire's Cowl" },
-            {0x44, "Ambassador's Sash" },
-            {0x48, "Angel Wings" },
-            {0x4E, "Cape of Conjuring" },
-            {0x53, "Recanter's Cloak" },
-            {0x63, "Cape of Velocity" },
-            {0x6D, "Everflowing Crystal Cloak" },
-            {0x82, "Cloak of Undead King" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>()
+            {
+                {0xFF, "None" },
+                {0x2A, "Dragon Wing Tabard" },
+                {0x37, "Vampire's Cowl" },
+                {0x44, "Ambassador's Sash" },
+                {0x48, "Angel Wings" },
+                {0x4E, "Cape of Conjuring" },
+                {0x53, "Recanter's Cloak" },
+                {0x63, "Cape of Velocity" },
+                {0x6D, "Everflowing Crystal Cloak" },
+                {0x82, "Cloak of Undead King" },
+                {0x8D, "Diplomat's Cloak" },
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {159, "Cape of Silence"},
+            };
+        }
     }
 
-    public class Boots
+    public class Boots : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Boots()
         {
-            {0xFF, "None" },
-            {0x20, "Sandal's of the Saint" },
-            {0x29, "Dragonbone Greaves" },
-            {0x38, "Dead Men's Boots" },
-            {0x3B, "Boots of Polarity" },
-            {0x5A, "Boots of Levitation" },
-            {0x62, "Boots of Speed" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode =  new Dictionary<byte, string>()
+            {
+                {0xFF, "None" },
+                {0x20, "Sandal's of the Saint" },
+                {0x29, "Dragonbone Greaves" },
+                {0x38, "Dead Men's Boots" },
+                {0x3B, "Boots of Polarity" },
+                {0x5A, "Boots of Levitation" },
+                {0x62, "Boots of Speed" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {0x97, "Wayfarer's Boots"},
+            };
+        }
     }
 
-    public class Neck
+    public class Neck : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Neck()
         {
-            {0xFF, "None" },
-            {0x21, "Celestial Necklace of Bliss" },
-            {0x2B, "Necklace of Dragonteeth" },
-            {0x36, "Amulet of the Undertaker" },
-            {0x39, "Garniture of Interference" },
-            {0x47, "Necklace of Ocean Guidance" },
-            {0x4C, "Collar of Conjuring" },
-            {0x61, "Necklace of Swiftness" },
-            {0x64, "Pendant of Dispassion" },
-            {0x65, "Pendant of Second Sight" },
-            {0x66, "Pendant of Holiness" },
-            {0x67, "Pendant of Life" },
-            {0x68, "Pendant of Death" },
-            {0x69, "Pendant of Free Will" },
-            {0x6A, "Pendant of Negativity" },
-            {0x6B, "Pendant of Total Recall" },
-            {0x6C, "Pendant of Courage" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0xFF, "None" },
+                {0x21, "Celestial Necklace of Bliss" },
+                {0x2B, "Necklace of Dragonteeth" },
+                {0x36, "Amulet of the Undertaker" },
+                {0x39, "Garniture of Interference" },
+                {0x47, "Necklace of Ocean Guidance" },
+                {0x4C, "Collar of Conjuring" },
+                {0x61, "Necklace of Swiftness" },
+                {0x64, "Pendant of Dispassion" },
+                {0x65, "Pendant of Second Sight" },
+                {0x66, "Pendant of Holiness" },
+                {0x67, "Pendant of Life" },
+                {0x68, "Pendant of Death" },
+                {0x69, "Pendant of Free Will" },
+                {0x6A, "Pendant of Negativity" },
+                {0x6B, "Pendant of Total Recall" },
+                {0x6C, "Pendant of Courage" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {0x8E, "Pendant of Reflection" },
+                {157, "Pendant of Downfall"},
+            };
+        }
     }
 
-    public class Rings
+    public class Rings : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Rings()
         {
-            {0xFF, "None" },
-            {0x25, "Quiet Eye of the Dragon" },
-            {0x2D, "Still Eye of the Dragon" },
-            {0x43, "Diplomat Ring" },
-            {0x45, "Ring of the Wayfarer" },
-            {0x46, "Equestrian's Gloves" },
-            {0x4D, "Ring of Conjuring" },
-            {0x5E, "Ring of Vitality" },
-            {0x5F, "Ring of Life" },
-            {0x6E, "Ring of Infinite Gems" },
-            {0x71, "Eversmoking Ring of Sulfur" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>()
+            {
+                {0xFF, "None" },
+                {0x25, "Quiet Eye of the Dragon" },
+                {0x2D, "Still Eye of the Dragon" },
+                {0x43, "Diplomat Ring" },
+                {0x45, "Ring of the Wayfarer" },
+                {0x46, "Equestrian's Gloves" },
+                {0x4D, "Ring of Conjuring" },
+                {0x5E, "Ring of Vitality" },
+                {0x5F, "Ring of Life" },
+                {0x6E, "Ring of Infinite Gems" },
+                {0x71, "Eversmoking Ring of Sulfur" },
+                {0x8B, "Ring of the Magi" },
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {156, "Ring of Suppression"},
+                {158, "Ring of Oblivion"},
+                {163, "Seal of Sunset"},
+            };
+        }
     }
 
-    public class Items
+    public class Items : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Items()
         {
-            {0xFF, "None" },
-            {0x2E, "Clover of Fortune" },
-            {0x2F, "Cards of Prophecy" },
-            {0x30, "Ladybird of Luck" },
-            {0x31, "Badge of Courage" },
-            {0x32, "Crest of Valor" },
-            {0x33, "Glyph of Gallantry" },
-            {0x34, "Speculum" },
-            {0x35, "Spyglass" },
-            {0x3C, "Bow of Elven Cherrywood" },
-            {0x3D, "Bowstring of the Unicorns's Mane" },
-            {0x3E, "Angel Feather Arrows" },
-            {0x3F, "Bird of Perception" },
-            {0x40, "Stoic Watchman" },
-            {0x41, "Emblem of Cognizance" },
-            {0x42, "Statesmen's Medal" },
-            {0x49, "Charm of Mana" },
-            {0x4A, "Talisman of Mana" },
-            {0x4B, "Mystic Orb of Mana" },
-            {0x4F, "Orb of Firmament" },
-            {0x50, "Orb of Silt" },
-            {0x51, "Orb of Tempestous Fire" },
-            {0x52, "Orb of Driving Rain" },
-            {0x54, "Spirit of Opression" },
-            {0x55, "Hourglass of the Evil Hour" },
-            {0x56, "Tome of Fire Magic" },
-            {0x57, "Tome of Wind Magic" },
-            {0x58, "Tome of Water Magic" },
-            {0x59, "Tome of Earth Magic" },
-            {0x5B, "Golden Bow" },
-            {0x5C, "Sphere of Permanence" },
-            {0x5D, "Orb of Vulnerability" },
-            {0x60, "Vial of Lifeblood" },
-            {0x6F, "Everpouring Vial of Mercury" },
-            {0x70, "Inexhaustable Cart of Ore" },
-            {0x72, "Inexhaustable Cart of Lumber" },
-            {0x73, "Endless Sack of Gold" },
-            {0x74, "Endless Bag of Gold" },
-            {0x75, "Endless Purse of Gold" },
-            {0x76, "Legs of Legion" },
-            {0x77, "Loins of Legion" },
-            {0x78, "Torso of Legion" },
-            {0x79, "Arms of Legion" },
-            {0x7A, "Head of Legion" },
-            {0x7D, "Shackles of War" },
-            {0x7E, "Orb of Inhibition" },
-            {0x83, "Elixir of Life" },
-            {0x85, "Statue of Legion" },
-            {0x89, "Bow of the Sharpshooter" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0xFF, "None" },
+                {0x2E, "Clover of Fortune" },
+                {0x2F, "Cards of Prophecy" },
+                {0x30, "Ladybird of Luck" },
+                {0x31, "Badge of Courage" },
+                {0x32, "Crest of Valor" },
+                {0x33, "Glyph of Gallantry" },
+                {0x34, "Speculum" },
+                {0x35, "Spyglass" },
+                {0x3C, "Bow of Elven Cherrywood" },
+                {0x3D, "Bowstring of the Unicorns's Mane" },
+                {0x3E, "Angel Feather Arrows" },
+                {0x3F, "Bird of Perception" },
+                {0x40, "Stoic Watchman" },
+                {0x41, "Emblem of Cognizance" },
+                {0x42, "Statesmen's Medal" },
+                {0x49, "Charm of Mana" },
+                {0x4A, "Talisman of Mana" },
+                {0x4B, "Mystic Orb of Mana" },
+                {0x4F, "Orb of Firmament" },
+                {0x50, "Orb of Silt" },
+                {0x51, "Orb of Tempestous Fire" },
+                {0x52, "Orb of Driving Rain" },
+                {0x54, "Spirit of Opression" },
+                {0x55, "Hourglass of the Evil Hour" },
+                {0x56, "Tome of Fire Magic" },
+                {0x57, "Tome of Wind Magic" },
+                {0x58, "Tome of Water Magic" },
+                {0x59, "Tome of Earth Magic" },
+                {0x5B, "Golden Bow" },
+                {0x5C, "Sphere of Permanence" },
+                {0x5D, "Orb of Vulnerability" },
+                {0x60, "Vial of Lifeblood" },
+                {0x6F, "Everpouring Vial of Mercury" },
+                {0x70, "Inexhaustable Cart of Ore" },
+                {0x72, "Inexhaustable Cart of Lumber" },
+                {0x73, "Endless Sack of Gold" },
+                {0x74, "Endless Bag of Gold" },
+                {0x75, "Endless Purse of Gold" },
+                {0x76, "Legs of Legion" },
+                {0x77, "Loins of Legion" },
+                {0x78, "Torso of Legion" },
+                {0x79, "Arms of Legion" },
+                {0x7A, "Head of Legion" },
+                {0x7D, "Shackles of War" },
+                {0x7E, "Orb of Inhibition" },
+                {0x83, "Elixir of Life" },
+                {0x85, "Statue of Legion" },
+                {0x89, "Bow of the Sharpshooter" },
+                {0x8A, "Wizard's Well" },
+                {0x8C, "Cornucopia" },
+                
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {153, "Demon's Horseshoe"},
+                {154, "Shaman's Puppet"},
+                {160, "Golden Goose"},
+                {161, "Horn of the Abyss"},
+                {162, "Charm of Eclipse"},
+            };
+        }
     }
 
-    public class WarMachines
+    public class WarMachines : BaseArtifact 
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public WarMachines()
         {
-            {0x04, "Ballista" },
-            {0x05, "Ammo_Cart" },
-            {0x06, "First_Aid_Tent" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0x04, "Ballista" },
+                {0x05, "Ammo_Cart" },
+                {0x06, "First_Aid_Tent" }
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {0x92, "Canon" }
+            };
+        }
     }
 
-    public class Artifacts
+    public class Artifacts : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Artifacts()
         {
-            {0x00, "Spell Book" },
-            {0x01, "Spell Scroll" },
-            {0x02, "The Grail" },
-            {0x03, "Catapult" },
-            {0x04, "Ballista" },
-            {0x05, "Ammo Cart" },
-            {0x06, "First Aid Tent" },
-            {0x07, "Centaur's Axe" },
-            {0x08, "Blackshard of the Dead Knight" },
-            {0x09, "Greater Knoll's Flail" },
-            {0x0A, "Ogre's Club of Havoc" },
-            {0x0B, "Sword of Hellfire" },
-            {0X0C, "Titan's Gladius" },
-            {0x0D, "Shield of the Dwarven Lords" },
-            {0x0E, "Shield of the Yawning Dead" },
-            {0x0F, "Buckler of the Gnoll King" },
-            {0x10, "Targ of the Rampaging Ogre" },
-            {0x11, "Shield of the Damned" },
-            {0x12, "Sentinel's Shield" },
-            {0x13, "Helm of the Alabaster Unicorn" },
-            {0x14, "Skull Helmet" },
-            {0x15, "Helm of Chaos" },
-            {0x16, "Crown of the Supreme Magi" },
-            {0x17, "Hellstorm Helmet" },
-            {0x18, "Thunder Helmet" },
-            {0x19, "Breastplate of Petrified Wood" },
-            {0x1A, "Rib Cage" },
-            {0x1B, "Scales of the Greater Basilisk" },
-            {0x1C, "Tunic of the Cyclops King" },
-            {0x1D, "Breastplate of Brimstone" },
-            {0x1E, "Titan's Cuirass" },
-            {0x1F, "Armor of Wonder" },
-            {0x20, "Sandal's of the Saint" },
-            {0x21, "Celestial Necklace of Bliss" },
-            {0x22, "Lion's Shield of Courage" },
-            {0x23, "Sword of Judgement" },
-            {0x24, "Helm of Heavenly Enlightenment" },
-            {0x25, "Quiet Eye of the Dragon" },
-            {0x26, "Red Dragon Flame Tongue" },
-            {0x27, "Dragon Scale Shield" },
-            {0x28, "Dragon Scale Armor" },
-            {0x29, "Dragonbone Greaves" },
-            {0x2A, "Dragon Wing Tabard" },
-            {0x2B, "Necklace of Dragonteeth" },
-            {0x2C, "Crown of Dragontooth" },
-            {0x2D, "Still Eye of the Dragon" },
-            {0x2E, "Clover of Fortune" },
-            {0x2F, "Cards of Prophecy" },
-            {0x30, "Ladybird of Luck" },
-            {0x31, "Badge of Courage" },
-            {0x32, "Crest of Valor" },
-            {0x33, "Glyph of Gallantry" },
-            {0x34, "Speculum" },
-            {0x35, "Spyglass" },
-            {0x36, "Amulet of the Undertaker" },
-            {0x37, "Vampire's Cowl" },
-            {0x38, "Dead Men's Boots" },
-            {0x39, "Garniture of Interference" },
-            {0x3A, "Surcoat of Counterpoise" },
-            {0x3B, "Boots of Polarity" },
-            {0x3C, "Bow of Elven Cherrywood" },
-            {0x3D, "Bowstring of the Unicorns's Mane" },
-            {0x3E, "Angel Feather Arrows" },
-            {0x3F, "Bird of Perception" },
-            {0x40, "Stoic Watchman" },
-            {0x41, "Emblem of Cognizance" },
-            {0x42, "Statesmen's Medal" },
-            {0x43, "Diplomat Ring" },
-            {0x44, "Ambassador's Sash" },
-            {0x45, "Ring of the Wayfarer" },
-            {0x46, "Equestrian's Gloves" },
-            {0x47, "Necklace of Ocean Guidance" },
-            {0x48, "Angel Wings" },
-            {0x49, "Charm of Mana" },
-            {0x4A, "Talisman of Mana" },
-            {0x4B, "Mystic Orb of Mana" },
-            {0x4C, "Collar of Conjuring" },
-            {0x4D, "Ring of Conjuring" },
-            {0x4E, "Cape of Conjuring" },
-            {0x4F, "Orb of Firmament" },
-            {0x50, "Orb of Silt" },
-            {0x51, "Orb of Tempestous Fire" },
-            {0x52, "Orb of Driving Rain" },
-            {0x53, "Recanter's Cloak" },
-            {0x54, "Spirit of Opression" },
-            {0x55, "Hourglass of the Evil Hour" },
-            {0x56, "Tome of Fire Magic" },
-            {0x57, "Tome of Wind Magic" },
-            {0x58, "Tome of Water Magic" },
-            {0x59, "Tome of Earth Magic" },
-            {0x5A, "Boots of Levitation" },
-            {0x5B, "Golden Bow" },
-            {0x5C, "Sphere of Permanence" },
-            {0x5D, "Orb of Vulnerability" },
-            {0x5E, "Ring of Vitality" },
-            {0x5F, "Ring of Life" },
-            {0x60, "Vial of Lifeblood" },
-            {0x61, "Necklace of Swiftness" },
-            {0x62, "Boots of Speed" },
-            {0x63, "Cape of Velocity" },
-            {0x64, "Pendant of Dispassion" },
-            {0x65, "Pendant of Second Sight" },
-            {0x66, "Pendant of Holiness" },
-            {0x67, "Pendant of Life" },
-            {0x68, "Pendant of Death" },
-            {0x69, "Pendant of Free Will" },
-            {0x6A, "Pendant of Negativity" },
-            {0x6B, "Pendant of Total Recall" },
-            {0x6C, "Pendant of Courage" },
-            {0x6D, "Everflowing Crystal Cloak" },
-            {0x6E, "Ring of Infinite Gems" },
-            {0x6F, "Everpouring Vial of Mercury" },
-            {0x70, "Inexhaustable Cart of Ore" },
-            {0x71, "Eversmoking Ring of Sulfur" },
-            {0x72, "Inexhaustable Cart of Lumber" },
-            {0x73, "Endless Sack of Gold" },
-            {0x74, "Endless Bag of Gold" },
-            {0x75, "Endless Purse of Gold" },
-            {0x76, "Legs of Legion" },
-            {0x77, "Loins of Legion" },
-            {0x78, "Torso of Legion" },
-            {0x79, "Arms of Legion" },
-            {0x7A, "Head of Legion" },
-            {0x7B, "Sea Captain's Hat" },
-            {0x7C, "Spellbinder's Hat" },
-            {0x7D, "Shackles of War" },
-            {0x7E, "Orb of Inhibition" },
-            {0x7F, "Vial of Dragonblood" },
-            {0x80, "Armageddon's Blade" },
-            {0x81, "Angelic Alliance" },
-            {0x82, "Cloak of Undead King" },
-            {0x83, "Elixir of Life" },
-            {0x84, "Armor of the Dammed" },
-            {0x85, "Statue of Legion" },
-            {0x86, "Power of the Dragon Father" },
-            {0x87, "Titans Thunder" },
-            {0x88, "Admiral's Hat" },
-            {0x89, "Bow of the Sharpshooter" }
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0x00, "Spell Book" },
+                {0x01, "Spell Scroll" },
+                {0x02, "The Grail" },
+            };
+        }
+        public void AddArtifacts(Dictionary<byte, string> artifacts)
+        {
+            foreach (var element in artifacts)
+            {
+                if (_namesByCode.ContainsKey(element.Key))
+                {
+                    continue;
+                }
+                _namesByCode.Add(element.Key, element.Value);
+            }
+        }
     }
 
     public class ArtifactInfo
@@ -697,7 +606,29 @@ namespace Heroes3Editor.Models
             {0x86, "Power of the Dragon Father|+16|+16|+16|+16|+1|+1|Combination Artifact: Immune to Lvl 1-4 Spells" },
             {0x87, "Titans Thunder|+9|+9|+8|+8|||Combination Artifact: Can Cast Titan's Lightning Bolt" },
             {0x88, "Admiral's Hat|||||||Combination Artifact: Hero Sea Movement +1500, No Penalty to Board/Leave Boat, Can Cast Summon Boat and Scuttle Boat, Protection from Whirlpools." },
-            {0x89, "Bow of the Sharpshooter|||||||Combination Artifact: No Range and Obstacle Penalty, No Melee Penalty, Archery Skill +30%" }
+            {0x89, "Bow of the Sharpshooter|||||||Combination Artifact: No Range and Obstacle Penalty, No Melee Penalty, Archery Skill +30%" },
+            {0x8A, "Wizard's Well|||||||Combination Artifact: Regenerates all spell points each day" },
+            {0x8B, "Ring of the Magi|||||||Combination Artifact: Add 50 rounds to spell duration (56 rounds together with components effect)" },
+            {0x8C, "Cornucopia|||||||Combination Artifact: Generates 5 of each precious resource, each day." },
+            {0x8D, "Diplomat's Cloak|||||||Combination Artifact: Allows your hero to retreat or surrender when battling neutral monsters or defending a town. Multiplies your hero army strength by 3" },
+            {0x8E, "Pendant of Reflection|||||||Combination Artifact: Increases hero's magic resistance by 20%,increases hero's magic resistance by 30%" },
+            {0x8F, "Ironfist of the Ogre|+5|+4|+4|+4|||Combination Artifact: At the beginning of a combat casts Haste, Bloodlust, Fire Shield and Counterstrike." },
+            {148, "Shield of Naval Glory|||||||Increases Defense skill by 7" },
+            {149, "Royal Armor of Nix|||||||Increases Spell Power skill by 6" },
+            {150, "Crown of the Five Seas|||||||Increases Knowledge skill by 6" },
+            {151, "Wayfarer's Boots|||||||Allows your hero to move over rough terrain without penalty" },
+            {153, "Demon's Horseshoe|||||||Decreases enemy's Luck by 1" },
+            {154, "Shaman's Puppet|||||||Decreases enemy's Luck by 2" },
+            {155, "Hideous Mask|||||||Decreases enemy's Morale by 1" },
+            {156, "Ring of Suppression|||||||Decreases enemy's Morale by 1" },
+            {157, "Pendant of Downfall|||||||Decreases enemy's Morale by 2" },
+            {158, "Ring of Oblivion|||||||Makes all losses in the battle irrevocable" },
+            {159, "Cape of Silence|||||||Bans all level 1 and 2 spells in battle" },
+            {160, "Golden Goose|||||||Combination Artifact: brings 7000 gold per day" },
+            {161, "Horn of the Abyss|||||||After a stack of living creatures is slain, a stack of Fangarms will rise in their stead and will stay loyal to the hero after the battle concludes" },
+            {162, "Charm of Eclipse|||||||Reduces the Power skill of enemy hero by 10% during combat" },
+            {163, "Seal of Sunset|||||||Reduces the Power skill of enemy hero by 10% during combat" },
+            {164, "Plate of Dying Light|||||||Reduces the Power skill of enemy hero by 25% during combat" }
         };
 
         private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
@@ -792,159 +723,174 @@ namespace Heroes3Editor.Models
         public int this[string key] => _codesByName[key];
     }
 
-    public class Creatures
+    public class Creatures : BaseArtifact
     {
-        private static readonly Dictionary<byte, string> _namesByCode = new Dictionary<byte, string>()
+        public Creatures()
         {
-            {0x00, "Pikeman"},
-            {0x01, "Halberdier"},
-            {0x02, "Archer"},
-            {0x03, "Marksman"},
-            {0x04, "Griffin"},
-            {0x05, "Royal Griffin"},
-            {0x06, "Swordsman"},
-            {0x07, "Crusader"},
-            {0x08, "Monk"},
-            {0x09, "Zealot"},
-            {0x0A, "Cavalier"},
-            {0x0B, "Champion"},
-            {0x0C, "Angel"},
-            {0x0D, "Archangel"},
-            {0x0E, "Centaur"},
-            {0x0F, "Centaur Captain"},
-            {0x10, "Dwarf"},
-            {0x11, "Battle Dwarf"},
-            {0x12, "Wood Elf"},
-            {0x13, "Grand Elf"},
-            {0x14, "Pegasus"},
-            {0x15, "Silver Pegasus"},
-            {0x16, "Dendroid Guard"},
-            {0x17, "Dendroid Soldier"},
-            {0x18, "Unicorn"},
-            {0x19, "War Unicorn"},
-            {0x1A, "Green Dragon"},
-            {0x1B, "Gold Dragon"},
-            {0x1C, "Gremlin"},
-            {0x1D, "Master Gremlin"},
-            {0x1E, "Stone Gargoyle"},
-            {0x1F, "Obsidian Gargoyle"},
-            {0x20, "Stone Golem"},
-            {0x21, "Iron Golem"},
-            {0x22, "Mage"},
-            {0x23, "Arch Mage"},
-            {0x24, "Genie"},
-            {0x25, "Master Genie"},
-            {0x26, "Naga"},
-            {0x27, "Naga Queen"},
-            {0x28, "Giant"},
-            {0x29, "Titan"},
-            {0x2A, "Imp"},
-            {0x2B, "Familiar"},
-            {0x2C, "Gog"},
-            {0x2D, "Magog"},
-            {0x2E, "Hell Hound"},
-            {0x2F, "Cerberus"},
-            {0x30, "Demon"},
-            {0x31, "Horned Demon"},
-            {0x32, "Pit Fiend"},
-            {0x33, "Pit Lord"},
-            {0x34, "Efreet"},
-            {0x35, "Efreet Sultan"},
-            {0x36, "Devil"},
-            {0x37, "Arch Devil"},
-            {0x38, "Skeleton"},
-            {0x39, "Skeleton Warrior"},
-            {0x3A, "Walking Dead"},
-            {0x3B, "Zombie"},
-            {0x3C, "Wight"},
-            {0x3D, "Wraith"},
-            {0x3E, "Vampire"},
-            {0x3F, "Vampire Lord"},
-            {0x40, "Lich"},
-            {0x41, "Power Lich"},
-            {0x42, "Black Knight"},
-            {0x43, "Dread Knight"},
-            {0x44, "Bone Dragon"},
-            {0x45, "Ghost Dragon"},
-            {0x46, "Troglodyte"},
-            {0x47, "Infernal Troglodyte"},
-            {0x48, "Harpy"},
-            {0x49, "Harpy Hag"},
-            {0x4A, "Beholder"},
-            {0x4B, "Evil Eye"},
-            {0x4C, "Medusa"},
-            {0x4D, "Medusa Queen"},
-            {0x4E, "Minotaur"},
-            {0x4F, "Minotaur King"},
-            {0x50, "Manticore"},
-            {0x51, "Scorpicore"},
-            {0x52, "Red Dragon"},
-            {0x53, "Black Dragon"},
-            {0x54, "Goblin"},
-            {0x55, "Hobgoblin"},
-            {0x56, "Wolf Rider"},
-            {0x57, "Wolf Raider"},
-            {0x58, "Orc"},
-            {0x59, "Orc Chieftain"},
-            {0x5A, "Ogre"},
-            {0x5B, "Ogre Mage"},
-            {0x5C, "Roc"},
-            {0x5D, "Thunderbird"},
-            {0x5E, "Cyclops"},
-            {0x5F, "Cyclops King"},
-            {0x60, "Behemoth"},
-            {0x61, "Ancient Behemoth"},
-            {0x62, "Gnoll"},
-            {0x63, "Gnoll Marauder"},
-            {0x64, "Lizardman"},
-            {0x65, "Lizard Warrior"},
-            {0x66, "Serpent Fly"},
-            {0x67, "Dragon Fly"},
-            {0x68, "Basilisk"},
-            {0x69, "Greater Basilisk"},
-            {0x6A, "Gorgon"},
-            {0x6B, "Mighty Gorgon"},
-            {0x6C, "Wyvern"},
-            {0x6D, "Wyvern Monarch"},
-            {0x6E, "Hydra"},
-            {0x6F, "Chaos Hydra"},
-            {0x70, "Air Elemental"},
-            {0x71, "Earth Elemental"},
-            {0x72, "Fire Elemental"},
-            {0x73, "Water Elemental"},
-            {0x74, "Gold Golem"},
-            {0x75, "Diamond Golem"},
-            {0x76, "Pixies"},
-            {0x77, "Sprites"},
-            {0x78, "Psychic Elemental"},
-            {0x79, "Magic Elemental"},
-            {0x7B, "Ice Elemental"},
-            {0x7D, "Magma Elemental"},
-            {0x7F, "Storm Elemental"},
-            {0x81, "Energy Elemental"},
-            {0x82, "Firebird"},
-            {0x83, "Phoenix"},
-            {0x84, "Azure Dragon"},
-            {0x85, "Crystal Dragon"},
-            {0x86, "Faeri Dragon"},
-            {0x87, "Rust Dragon"},
-            {0x88, "Enchanter"},
-            {0x89, "Sharpshooter"},
-            {0x8A, "Halfling"},
-            {0x8B, "Peasant"},
-            {0x8C, "Boar"},
-            {0x8D, "Mummy"},
-            {0x8E, "Nomad"},
-            {0x8F, "Rogue"},
-            {0x90, "Troll"}
-        };
-
-        private static readonly Dictionary<string, byte> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
-
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
-
-        public string this[byte key] => _namesByCode[key];
-
-        public byte this[string key] => _codesByName[key];
+            _namesByCode = new Dictionary<byte, string>() {
+                {0x00, "Pikeman"},
+                {0x01, "Halberdier"},
+                {0x02, "Archer"},
+                {0x03, "Marksman"},
+                {0x04, "Griffin"},
+                {0x05, "Royal Griffin"},
+                {0x06, "Swordsman"},
+                {0x07, "Crusader"},
+                {0x08, "Monk"},
+                {0x09, "Zealot"},
+                {0x0A, "Cavalier"},
+                {0x0B, "Champion"},
+                {0x0C, "Angel"},
+                {0x0D, "Archangel"},
+                {0x0E, "Centaur"},
+                {0x0F, "Centaur Captain"},
+                {0x10, "Dwarf"},
+                {0x11, "Battle Dwarf"},
+                {0x12, "Wood Elf"},
+                {0x13, "Grand Elf"},
+                {0x14, "Pegasus"},
+                {0x15, "Silver Pegasus"},
+                {0x16, "Dendroid Guard"},
+                {0x17, "Dendroid Soldier"},
+                {0x18, "Unicorn"},
+                {0x19, "War Unicorn"},
+                {0x1A, "Green Dragon"},
+                {0x1B, "Gold Dragon"},
+                {0x1C, "Gremlin"},
+                {0x1D, "Master Gremlin"},
+                {0x1E, "Stone Gargoyle"},
+                {0x1F, "Obsidian Gargoyle"},
+                {0x20, "Stone Golem"},
+                {0x21, "Iron Golem"},
+                {0x22, "Mage"},
+                {0x23, "Arch Mage"},
+                {0x24, "Genie"},
+                {0x25, "Master Genie"},
+                {0x26, "Naga"},
+                {0x27, "Naga Queen"},
+                {0x28, "Giant"},
+                {0x29, "Titan"},
+                {0x2A, "Imp"},
+                {0x2B, "Familiar"},
+                {0x2C, "Gog"},
+                {0x2D, "Magog"},
+                {0x2E, "Hell Hound"},
+                {0x2F, "Cerberus"},
+                {0x30, "Demon"},
+                {0x31, "Horned Demon"},
+                {0x32, "Pit Fiend"},
+                {0x33, "Pit Lord"},
+                {0x34, "Efreet"},
+                {0x35, "Efreet Sultan"},
+                {0x36, "Devil"},
+                {0x37, "Arch Devil"},
+                {0x38, "Skeleton"},
+                {0x39, "Skeleton Warrior"},
+                {0x3A, "Walking Dead"},
+                {0x3B, "Zombie"},
+                {0x3C, "Wight"},
+                {0x3D, "Wraith"},
+                {0x3E, "Vampire"},
+                {0x3F, "Vampire Lord"},
+                {0x40, "Lich"},
+                {0x41, "Power Lich"},
+                {0x42, "Black Knight"},
+                {0x43, "Dread Knight"},
+                {0x44, "Bone Dragon"},
+                {0x45, "Ghost Dragon"},
+                {0x46, "Troglodyte"},
+                {0x47, "Infernal Troglodyte"},
+                {0x48, "Harpy"},
+                {0x49, "Harpy Hag"},
+                {0x4A, "Beholder"},
+                {0x4B, "Evil Eye"},
+                {0x4C, "Medusa"},
+                {0x4D, "Medusa Queen"},
+                {0x4E, "Minotaur"},
+                {0x4F, "Minotaur King"},
+                {0x50, "Manticore"},
+                {0x51, "Scorpicore"},
+                {0x52, "Red Dragon"},
+                {0x53, "Black Dragon"},
+                {0x54, "Goblin"},
+                {0x55, "Hobgoblin"},
+                {0x56, "Wolf Rider"},
+                {0x57, "Wolf Raider"},
+                {0x58, "Orc"},
+                {0x59, "Orc Chieftain"},
+                {0x5A, "Ogre"},
+                {0x5B, "Ogre Mage"},
+                {0x5C, "Roc"},
+                {0x5D, "Thunderbird"},
+                {0x5E, "Cyclops"},
+                {0x5F, "Cyclops King"},
+                {0x60, "Behemoth"},
+                {0x61, "Ancient Behemoth"},
+                {0x62, "Gnoll"},
+                {0x63, "Gnoll Marauder"},
+                {0x64, "Lizardman"},
+                {0x65, "Lizard Warrior"},
+                {0x66, "Serpent Fly"},
+                {0x67, "Dragon Fly"},
+                {0x68, "Basilisk"},
+                {0x69, "Greater Basilisk"},
+                {0x6A, "Gorgon"},
+                {0x6B, "Mighty Gorgon"},
+                {0x6C, "Wyvern"},
+                {0x6D, "Wyvern Monarch"},
+                {0x6E, "Hydra"},
+                {0x6F, "Chaos Hydra"},
+                {0x70, "Air Elemental"},
+                {0x71, "Earth Elemental"},
+                {0x72, "Fire Elemental"},
+                {0x73, "Water Elemental"},
+                {0x74, "Gold Golem"},
+                {0x75, "Diamond Golem"},
+                {0x76, "Pixies"},
+                {0x77, "Sprites"},
+                {0x78, "Psychic Elemental"},
+                {0x79, "Magic Elemental"},
+                {0x7B, "Ice Elemental"},
+                {0x7D, "Magma Elemental"},
+                {0x7F, "Storm Elemental"},
+                {0x81, "Energy Elemental"},
+                {0x82, "Firebird"},
+                {0x83, "Phoenix"},
+                {0x84, "Azure Dragon"},
+                {0x85, "Crystal Dragon"},
+                {0x86, "Faeri Dragon"},
+                {0x87, "Rust Dragon"},
+                {0x88, "Enchanter"},
+                {0x89, "Sharpshooter"},
+                {0x8A, "Halfling"},
+                {0x8B, "Peasant"},
+                {0x8C, "Boar"},
+                {0x8D, "Mummy"},
+                {0x8E, "Nomad"},
+                {0x8F, "Rogue"},
+                {0x90, "Troll"},
+            };
+            _HOTANamesByCode = new Dictionary<byte, string>() {
+                {153, "Nymph"},
+                {154, "Oceanids"},
+                {155, "Crew Mates"},
+                {156, "Seamen"},
+                {157, "Pirates"},
+                {158, "Corsairs"},
+                {151, "Sea Dogs"},
+                {159, "Stormbirds"},
+                {160, "Ayssids"},
+                {161, "Sea Witches"},
+                {162, "Sorceresses"},
+                {163, "Nix"},
+                {164, "Nix Warriors"},
+                {165, "Sea Serpents"},
+                {166, "Haspids"},
+                {167, "Satyrs"},
+                {168, "Fangarms"},
+                {169, "Leprechauns"},
+                {170, "Steel golems"}
+            };
+        }
     }
 }

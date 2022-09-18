@@ -13,6 +13,7 @@ namespace Heroes3Editor.Models
 {
     public class Game
     {
+        public bool IsHOTA { get; set; }
         public byte[] Bytes { get; }
 
         public IList<Hero> Heroes { get; } = new List<Hero>();
@@ -27,8 +28,31 @@ namespace Heroes3Editor.Models
             using var memoryStream = new MemoryStream();
             gzipStream.CopyTo(memoryStream);
             Bytes = memoryStream.ToArray();
+            var gameVersionMajor = Bytes[8];
+            var gameVersionMinor = Bytes[12];
+            
+            if (gameVersionMajor >= 44 && gameVersionMinor >= 5)
+            {
+                SetHOTA();
+            }
+            else {
+                SetClassic();
+            }
+            Constants.LoadAllArtifacts();
         }
 
+        public void SetHOTA()
+        {
+            IsHOTA = true;
+            Constants.LoadHOTAItems();
+            Constants.HeroOffsets["SkillSlots"] = 923;
+        }
+        public void SetClassic()
+        {
+            IsHOTA = false;
+            Constants.HeroOffsets["SkillSlots"] = 41;
+            Constants.RemoveHOTAReferenceCodes();
+        }
         public void Save(string file)
         {
             using var fileStream = (new FileInfo(file)).OpenWrite();
@@ -82,6 +106,7 @@ namespace Heroes3Editor.Models
 
         private Game _game;
 
+        public bool IsHOTAGame => _game.IsHOTA;
         public int BytePosition { get; }
 
         public byte[] Attributes { get; } = new byte[4];
