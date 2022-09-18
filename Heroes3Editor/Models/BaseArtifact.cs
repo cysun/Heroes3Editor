@@ -30,6 +30,10 @@ namespace Heroes3Editor.Models
         {
             foreach (var code in _HOTANamesByCode)
             {
+                if (_namesByCode.ContainsKey(code.Key))
+                {
+                    continue;
+                }
                 _namesByCode.Add(code.Key, code.Value);
             }
         }
