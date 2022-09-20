@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Heroes3Editor.Models;
-using System.Diagnostics;
 using System.Windows.Controls.Primitives;
-using System.ComponentModel;
+using Heroes3Editor.Models;
 
 namespace Heroes3Editor
 {
@@ -33,7 +22,8 @@ namespace Heroes3Editor
                 {
                     SetHOTASettings();
                 }
-                else { 
+                else
+                {
                     SetClassicSettings();
                 }
                 for (int i = 0; i < 4; ++i)
@@ -117,7 +107,7 @@ namespace Heroes3Editor
             SetComponentVisibility("BallistaRadio", Visibility.Hidden);
             SetComponentVisibility("Canon", Visibility.Hidden);
         }
-        private void SetComponentVisibility(string name, Visibility visibility )
+        private void SetComponentVisibility(string name, Visibility visibility)
         {
             var component = FindName(name) as ButtonBase;
             if (component != null)

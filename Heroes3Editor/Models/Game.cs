@@ -2,12 +2,8 @@
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
-using System.Security.Cryptography;
-using System.Security.Policy;
 using System.Text;
 using ICSharpCode.SharpZipLib.GZip;
-using System.Diagnostics;
 
 namespace Heroes3Editor.Models
 {
@@ -30,12 +26,13 @@ namespace Heroes3Editor.Models
             Bytes = memoryStream.ToArray();
             var gameVersionMajor = Bytes[8];
             var gameVersionMinor = Bytes[12];
-            
+
             if (gameVersionMajor >= 44 && gameVersionMinor >= 5)
             {
                 SetHOTA();
             }
-            else {
+            else
+            {
                 SetClassic();
             }
             Constants.LoadAllArtifacts();

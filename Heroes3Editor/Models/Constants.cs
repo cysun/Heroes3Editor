@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.DirectoryServices;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Heroes3Editor.Models
 {
@@ -291,7 +289,7 @@ namespace Heroes3Editor.Models
     {
         public Boots()
         {
-            _namesByCode =  new Dictionary<byte, string>()
+            _namesByCode = new Dictionary<byte, string>()
             {
                 {0xFF, "None" },
                 {0x20, "Sandal's of the Saint" },
@@ -420,7 +418,7 @@ namespace Heroes3Editor.Models
                 {0x89, "Bow of the Sharpshooter" },
                 {0x8A, "Wizard's Well" },
                 {0x8C, "Cornucopia" },
-                
+
             };
             _HOTANamesByCode = new Dictionary<byte, string>() {
                 {153, "Demon's Horseshoe"},
@@ -432,7 +430,7 @@ namespace Heroes3Editor.Models
         }
     }
 
-    public class WarMachines : BaseArtifact 
+    public class WarMachines : BaseArtifact
     {
         public WarMachines()
         {

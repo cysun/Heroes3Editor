@@ -8,7 +8,7 @@ a little easier.
 
 ## Usage and Features
 
-Download the latest binary release zip file (e.g. *Heroes3Editor-v0.9.zip*) from the
+Download the latest binary release zip file (e.g. *Heroes3Editor-v1.0.zip*) from the
 [Releases section](https://github.com/cysun/Heroes3Editor/releases). Unzip it to anywhere on your hard drive
 then run `Heroes3Editor.exe` (no installation necessary).
 
@@ -19,13 +19,15 @@ file. Once a hero is found, you can edit the following:
 * Secondary skills and skill levels
 * Spells
 * Creature stack type and amount
-* War machines (i.e. Ballista, Ammo Cart, and First Aid Tent)
+* War machines (i.e. Ballista, Ammo Cart, First Aid Tent, and Cannon in HotA)
 * Equipped artifacts
+
+Support Horn of the Abyss (HotA) savegames as of Version 1.0.
 
 ## Known Issues
 
-Combination Artifacts (e.g. Cloak of the Undead King) are not supported. The program will crash if you try to
-edit a hero equipped with a combo artifact.
+Combination Artifacts (e.g. Cloak of the Undead King) and spell scrolls are not supported. The program may crash if
+you try to edit a hero equipped with a combo artifact or a spell scroll.
 
 ## About Savegame File Format
 

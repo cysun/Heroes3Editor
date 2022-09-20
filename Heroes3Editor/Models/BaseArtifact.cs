@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Heroes3Editor.Models
 {
@@ -14,6 +12,7 @@ namespace Heroes3Editor.Models
         internal Dictionary<string, byte> _codesByName => _namesByCode?.ToDictionary(i => i.Value, i => i.Key);
 
         public Dictionary<byte, string> GetArtifacts => _namesByCode.Where(x => x.Value != "None").ToDictionary(x => x.Key, x => x.Value);
+
         public BaseArtifact()
         {
             _namesByCode = new Dictionary<byte, string>();
@@ -42,12 +41,11 @@ namespace Heroes3Editor.Models
         {
             foreach (var kvp in _HOTANamesByCode)
             {
-                if (_namesByCode.ContainsKey(kvp.Key)) {
+                if (_namesByCode.ContainsKey(kvp.Key))
+                {
                     _namesByCode.Remove(kvp.Key);
                 }
-                
             }
-            
         }
     }
 }
