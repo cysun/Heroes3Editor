@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Heroes3Editor.Models;
 using System.Diagnostics;
+using System.Windows.Controls.Primitives;
+using System.ComponentModel;
 
 namespace Heroes3Editor
 {
@@ -27,7 +29,13 @@ namespace Heroes3Editor
             set
             {
                 _hero = value;
-
+                if (_hero.IsHOTAGame)
+                {
+                    SetHOTASettings();
+                }
+                else { 
+                    SetClassicSettings();
+                }
                 for (int i = 0; i < 4; ++i)
                 {
                     var txtBox = FindName("Attribute" + i) as TextBox;
@@ -77,8 +85,8 @@ namespace Heroes3Editor
 
                 foreach (var warMachine in _hero.WarMachines)
                 {
-                    var chkBox = FindName(warMachine) as CheckBox;
-                    chkBox.IsChecked = true;
+                    var toggleComponent = FindName(warMachine) as ToggleButton;
+                    toggleComponent.IsChecked = true;
                 }
 
                 var gears = new List<string>(_hero.EquippedArtifacts.Keys);
@@ -97,6 +105,26 @@ namespace Heroes3Editor
             InitializeComponent();
         }
 
+        private void SetHOTASettings()
+        {
+            SetComponentVisibility("Ballista", Visibility.Hidden);
+            SetComponentVisibility("BallistaRadio", Visibility.Visible);
+            SetComponentVisibility("Canon", Visibility.Visible);
+        }
+        private void SetClassicSettings()
+        {
+            SetComponentVisibility("Ballista", Visibility.Visible);
+            SetComponentVisibility("BallistaRadio", Visibility.Hidden);
+            SetComponentVisibility("Canon", Visibility.Hidden);
+        }
+        private void SetComponentVisibility(string name, Visibility visibility )
+        {
+            var component = FindName(name) as ButtonBase;
+            if (component != null)
+            {
+                component.Visibility = visibility;
+            }
+        }
         private void UpdateAttribute(object sender, RoutedEventArgs e)
         {
             var txtBox = e.Source as TextBox;
@@ -185,14 +213,18 @@ namespace Heroes3Editor
 
         private void AddWarMachine(object sender, RoutedEventArgs e)
         {
-            var chkBox = e.Source as CheckBox;
-            _hero.AddWarMachine(chkBox.Name);
+            var component = e.Source as ButtonBase;
+            if (component == null)
+            {
+                return;
+            }
+            _hero.AddWarMachine(component.Tag.ToString());
         }
 
         private void RemoveWarMachine(object sender, RoutedEventArgs e)
         {
-            var chkBox = e.Source as CheckBox;
-            _hero.RemoveWarMachine(chkBox.Name);
+            var component = e.Source as ButtonBase;
+            _hero.RemoveWarMachine(component.Tag.ToString());
         }
 
         private void UpdateEquippedArtifact(object sender, RoutedEventArgs e)
