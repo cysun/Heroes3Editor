@@ -176,7 +176,7 @@ namespace Heroes3Editor.Models
                 {0x0A, "Ogre's Club of Havoc" },
                 {0x0B, "Sword of Hellfire" },
                 {0X0C, "Titan's Gladius" },
-                {0x11, "Sword of Judgement" },
+                {0x23, "Sword of Judgement" },
                 {0x26, "Red Dragon Flame Tongue" },
                 {0x80, "Armageddon's Blade" },
                 {0x81, "Angelic Alliance" },
