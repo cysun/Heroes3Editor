@@ -3,6 +3,7 @@ using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using ICSharpCode.SharpZipLib.GZip;
 
 namespace Heroes3Editor.Models
@@ -81,17 +82,28 @@ namespace Heroes3Editor.Models
         {
             byte[] pattern = new byte[13];
             Encoding.ASCII.GetBytes(name).CopyTo(pattern, 0);
-            for (int i = startPosition - 13; i > 0; --i)
+            if (Regex.IsMatch(name, @"\p{IsCyrillic}"))
+            {
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                Encoding win1251 = Encoding.GetEncoding("windows-1251");
+                pattern = win1251.GetBytes(name);
+            }
+
+            for (int i = startPosition - pattern.Length; i > 0; --i)
             {
                 bool found = true;
-                for (int j = 0; j < 13; ++j)
+                for (int j = 0; j < pattern.Length; ++j)
+                {
                     if (Bytes[i + j] != pattern[j])
                     {
                         found = false;
                         break;
                     }
+                }
                 if (found)
+                {
                     return i;
+                }
             }
             return -1;
         }
