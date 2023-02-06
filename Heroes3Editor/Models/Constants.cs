@@ -22,8 +22,7 @@ namespace Heroes3Editor.Models
 
         public static ArtifactInfo ArtifactInfo { get; } = new ArtifactInfo();
 
-        public static string[] Heroes { get; } =
-        {
+        private static readonly string[] _heroes = {
             "Christian", "Edric", "Orrin", "Sylvia", "Valeska", "Sorsha", "Tyris", "Lord Haart", "Catherine",
             "Roland", "Sir Mullich", "Adela", "Adelaide", "Caitlin", "Cuthbert", "Ingham", "Loynis", "Rion",
             "Sanya", "Jenova", "Kyrre", "Ivor", "Ufretin", "Clancy", "Thorgrim", "Ryland", "Mephala", "Gelu",
@@ -43,6 +42,7 @@ namespace Heroes3Editor.Models
             "Elmore","Illor","Leena","Miriam","Andal","Astra","Dargem","Eovacius","Manfred","Zilare",
             "Jeremy","Bidley","Spint", "Casmetra","Tark"
         };
+        public static string[] Heroes { get; } = _heroes.OrderBy(x => x).ToArray();
 
         public static Dictionary<string, int> HeroOffsets = new Dictionary<string, int>()
         {
@@ -156,7 +156,7 @@ namespace Heroes3Editor.Models
 
         private static readonly Dictionary<string, int> _codesByName = _namesByCode.ToDictionary(i => i.Value, i => i.Key);
 
-        public string[] Names { get; } = _namesByCode.Values.ToArray();
+        public string[] Names { get; } = _namesByCode.Values.OrderBy(x => x).ToArray();
 
         public string this[int key] => _namesByCode[key];
 
