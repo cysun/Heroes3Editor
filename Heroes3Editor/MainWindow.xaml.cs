@@ -64,6 +64,8 @@ namespace Heroes3Editor
 
         private void SearchHero(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(heroCboBox.Text)) return;
+
             var added = Game.SearchHero(heroCboBox.Text);
             if (added)
             {
